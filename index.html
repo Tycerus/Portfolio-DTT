@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="vi" class="scroll-smooth">
+<html lang="vi" data-lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dương Thế Tài (2005) | Supply Chain & Operations Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -20,30 +20,43 @@
     }
   </script>
   <style>
-    .tab-content { display: none; animation: fadeIn 0.25s ease-in-out; }
+    body {
+      background-color: #050811;
+      background-image: 
+        radial-gradient(at 15% 10%, rgba(37, 99, 235, 0.12) 0px, transparent 45%),
+        radial-gradient(at 85% 25%, rgba(16, 185, 129, 0.08) 0px, transparent 45%);
+      background-attachment: fixed;
+    }
+    .tab-content { display: none; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
     .tab-content.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #020617; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    html[data-lang="en"] .lang-vi { display: none !important; }
+    html[data-lang="vi"] .lang-en { display: none !important; }
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: #050811; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+    .glass-card {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.78) 0%, rgba(9, 14, 28, 0.9) 100%);
+      backdrop-filter: blur(12px);
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white">
+<body class="text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white">
 
   <!-- ================= TOP NAVIGATION ================= -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/85 border-b border-slate-800/80">
-    <div class="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-      <button onclick="switchTab('index')" class="text-left group flex items-center gap-3">
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-[#050811]/85 border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
+      <button onclick="switchTab('index')" class="text-left group flex items-center gap-3 shrink-0">
         <span class="w-3 h-3 rounded-full bg-blue-500 ring-4 ring-blue-500/20 group-hover:bg-emerald-400 transition"></span>
         <div>
           <span class="text-sm md:text-base font-extrabold tracking-tight text-white block leading-none">DUONG THE TAI</span>
-          <span class="text-[10px] font-mono text-slate-400 tracking-widest uppercase">Operations &amp; Supply Chain</span>
+          <span class="text-[10px] font-mono text-slate-400 tracking-widest uppercase">Supply Chain &amp; Ops</span>
         </div>
       </button>
 
       <!-- Desktop Tab Menu -->
-      <nav class="hidden lg:flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800">
+      <nav class="hidden lg:flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800/90">
         <button onclick="switchTab('index')" id="nav-index" class="nav-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold transition bg-blue-600 text-white">01. INDEX</button>
         <button onclick="switchTab('academics')" id="nav-academics" class="nav-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold transition text-slate-400 hover:text-white">02. ACADEMICS</button>
         <button onclick="switchTab('cases')" id="nav-cases" class="nav-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold transition text-slate-400 hover:text-white">03. CASES (14)</button>
@@ -51,12 +64,23 @@
         <button onclick="switchTab('journal')" id="nav-journal" class="nav-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold transition text-slate-400 hover:text-white">05. JOURNAL</button>
       </nav>
 
+      <!-- Right Controls: Language + All Mode + Contact -->
       <div class="flex items-center gap-2">
-        <button onclick="toggleAllMode()" id="all-mode-btn" class="px-3 py-1.5 text-xs font-mono text-slate-300 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg transition">
-          <i class="fa-solid fa-layer-group mr-1"></i> Xem tất cả
+        <div class="flex items-center bg-slate-900 border border-slate-700/80 rounded-lg p-0.5 font-mono text-xs">
+          <button id="lang-btn-vi" onclick="setLanguage('vi')" class="px-2.5 py-1 rounded-md font-bold transition bg-blue-600 text-white">VN</button>
+          <button id="lang-btn-en" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-md font-semibold transition text-slate-400 hover:text-white">EN</button>
+        </div>
+
+        <button onclick="toggleAllMode()" id="all-mode-btn" class="px-3 py-1.5 text-xs font-mono text-slate-300 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg transition hidden sm:inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-layer-group"></i>
+          <span class="lang-vi">Xem tất cả</span>
+          <span class="lang-en">View All</span>
         </button>
-        <a href="mailto:duongthetai2013@gmail.com" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition shadow-lg shadow-blue-600/20">
-          <i class="fa-regular fa-paper-plane"></i> Liên hệ
+
+        <a href="mailto:duongthetai2013@gmail.com" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition shadow-lg shadow-blue-600/25">
+          <i class="fa-regular fa-paper-plane"></i>
+          <span class="lang-vi hidden sm:inline">Liên hệ</span>
+          <span class="lang-en hidden sm:inline">Contact</span>
         </a>
       </div>
     </div>
@@ -65,224 +89,285 @@
     <div class="lg:hidden flex overflow-x-auto gap-1 px-4 py-2 bg-slate-900/95 border-t border-slate-800/80 text-xs font-mono">
       <button onclick="switchTab('index')" id="mnav-index" class="mnav-btn shrink-0 px-3 py-1 rounded-md bg-blue-600 text-white font-semibold">01. INDEX</button>
       <button onclick="switchTab('academics')" id="mnav-academics" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">02. ACADEMICS</button>
-      <button onclick="switchTab('cases')" id="mnav-cases" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">03. CASES</button>
+      <button onclick="switchTab('cases')" id="mnav-cases" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">03. CASES (14)</button>
       <button onclick="switchTab('ventures')" id="mnav-ventures" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">04. VENTURES</button>
       <button onclick="switchTab('journal')" id="mnav-journal" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">05. JOURNAL</button>
     </div>
   </header>
 
-  <!-- ================= MAIN WRAPPER ================= -->
-  <main class="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16 space-y-24">
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14 space-y-20">
 
     <!-- ==========================================
          SECTION 1: INDEX (HỒ SƠ & TỔNG QUAN)
     =========================================== -->
     <section id="sec-index" class="tab-content active space-y-16">
       
-      <!-- 1.1 Editorial Biography & Profile -->
-      <div class="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-blue-950/30 border border-slate-800 overflow-hidden">
-        <div class="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12 relative z-10">
+      <!-- 1.1 Editorial Biography & Profile (No extra buttons, prominent Avatar) -->
+      <div class="relative p-8 md:p-12 rounded-3xl glass-card border border-slate-800/90 shadow-2xl overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 relative z-10">
+          
+          <!-- Avatar Frame -->
           <div class="relative shrink-0 group">
-            <div class="w-36 h-36 md:w-48 md:h-48 rounded-2xl overflow-hidden border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 bg-slate-950 flex items-center justify-center">
-              <img src="avatar.jpg" alt="Dương Thế Tài" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-blue-950 text-blue-400 font-mono text-center p-4\'><i class=\'fa-solid fa-user-tie text-4xl mb-2\'></i><span class=\'text-xs font-bold\'>DƯƠNG THẾ TÀI</span></div>';">
+            <div class="w-40 h-40 md:w-52 md:h-52 rounded-3xl overflow-hidden border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 bg-slate-950 flex items-center justify-center">
+              <img id="hero-avatar" src="avatar.jpg" data-alt-srcs="avatar.png,Avatar.jpg,Avatar.png,SECC.JPG" onerror="handleSmartImgError(this)" alt="Dương Thế Tài" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
             </div>
-            <span class="absolute -bottom-2 -right-2 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 backdrop-blur-sm">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1 animate-pulse"></span>ACTIVE
+            <span class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-slate-950/95 border border-emerald-500/50 text-emerald-400 shadow-lg whitespace-nowrap">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1 animate-pulse"></span>AVAILABLE FOR TRAINEE ROLES
             </span>
           </div>
 
+          <!-- Bio Text -->
           <div class="space-y-5 text-center md:text-left flex-1">
-            <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-blue-950/80 border border-blue-800/70 text-blue-400 text-xs font-mono">
-              <span>EDITORIAL BIOGRAPHY &amp; PROFILE</span>
+            <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/70 text-blue-400 text-xs font-mono">
+              <span>1.1 // EDITORIAL BIOGRAPHY &amp; PROFILE</span>
               <span>&bull;</span>
-              <span>BORN 2005</span>
+              <span>UEH DUAL-MAJOR (2005)</span>
             </div>
             <div>
-              <h1 class="text-3xl md:text-5xl font-black tracking-tight text-white">DUONG THE TAI <span class="text-slate-500 font-light">(2005)</span></h1>
+              <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white">
+                DUONG THE TAI <span class="text-slate-500 font-light">(2005)</span>
+              </h1>
               <p class="text-lg md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 mt-2">
                 Supply Chain &amp; Operations Trainee Candidate
               </p>
             </div>
-            <p class="text-slate-300 text-sm md:text-base leading-relaxed border-l-0 md:border-l-4 border-blue-500 md:pl-4">
-              Ứng viên Quản trị viên Tập sự Chuỗi cung ứng &amp; Vận hành theo đuổi chương trình Song ngành Kinh doanh Quốc tế và Logistics tại UEH, kết hợp tư duy tối ưu hóa hệ thống bằng dữ liệu, bản lĩnh điều phối hiện trường thực chiến và kỷ lục hơn 15 giải thưởng học thuật, khởi nghiệp cấp Quốc gia &amp; Khu vực.
+            <p class="text-slate-300 text-sm md:text-base leading-relaxed border-l-0 md:border-l-4 border-blue-500 md:pl-5">
+              <span class="lang-vi">
+                Ứng viên Quản trị viên Tập sự Chuỗi cung ứng &amp; Vận hành theo đuổi chương trình Song ngành Kinh doanh Quốc tế và Logistics tại Đại học Kinh tế TP. Hồ Chí Minh (UEH). Kết hợp tư duy tối ưu hóa hệ thống bằng dữ liệu, bản lĩnh điều phối hiện trường thực chiến và kỷ lục hơn 15 giải thưởng học thuật, khởi nghiệp cấp Quốc gia &amp; Khu vực.
+              </span>
+              <span class="lang-en">
+                Supply Chain &amp; Operations Trainee Candidate commanding a high-performance Dual Major in International Business and Logistics &amp; Supply Chain Management at UEH University. Blending data-driven system optimization, hands-on field operations execution, and a proven record of 15+ national &amp; regional championships.
+              </span>
             </p>
-          
+          </div>
+
+        </div>
+      </div>
 
       <!-- 1.2 Key Performance Indicators -->
       <div class="space-y-6">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.2 &mdash; Key Performance Indicators (KPIs)</h2>
-          <span class="text-xs font-mono text-slate-500">VERIFIED METRICS</span>
+          <span class="text-xs font-mono text-slate-500">VERIFIED RECORD</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-blue-500/50 transition flex flex-col justify-between">
+          <div class="p-7 rounded-2xl glass-card border border-slate-800/90 hover:border-blue-500/50 transition flex flex-col justify-between">
             <div>
-              <span class="text-4xl md:text-5xl font-black text-white font-mono">15+</span>
-              <h3 class="text-lg font-bold text-blue-400 mt-2">Academic Achievements</h3>
+              <div class="flex items-baseline justify-between">
+                <span class="text-4xl md:text-5xl font-black text-white font-mono">15+</span>
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-blue-950 text-blue-400 border border-blue-800">NATIONAL &amp; REGIONAL</span>
+              </div>
+              <h3 class="text-lg font-bold text-blue-400 mt-3">
+                <span class="lang-vi">15 Thành Tựu Học Thuật &amp; Khởi Nghiệp</span>
+                <span class="lang-en">15 Academic Achievements</span>
+              </h3>
               <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-                An impressive record with over 15 major championships, high honors, and exemplary research awards in the fields of business, entrepreneurship, and logistics nationwide. I believe 2025 is a landmark year for my achievements, as winning 10 awards in one year across two semesters at UEH University truly requires overcoming many obstacles.
+                <span class="lang-vi">Kỷ lục ấn tượng với hơn 15 ngôi vị Quán quân, Á quân và giải thưởng nghiên cứu khoa học xuất sắc trong lĩnh vực kinh doanh, khởi nghiệp và logistics toàn quốc. Riêng năm 2025 đánh dấu cột mốc bứt phá với 10 giải thưởng lớn liên tiếp qua hai học kỳ tại UEH.</span>
+                <span class="lang-en">An impressive record with over 15 major championships, high honors, and exemplary research awards in business, entrepreneurship, and logistics nationwide. 2025 stands as a landmark year with 10 awards won across two semesters at UEH University.</span>
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs font-mono text-emerald-400">10 Awards Won in 2025 Alone</div>
+            <div class="mt-5 pt-3 border-t border-slate-800/80 text-xs font-mono text-emerald-400">
+              <i class="fa-solid fa-trophy mr-1"></i> 10 Awards Won in 2025 Alone
+            </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 transition flex flex-col justify-between">
+          <div class="p-7 rounded-2xl glass-card border border-slate-800/90 hover:border-cyan-500/50 transition flex flex-col justify-between">
             <div>
-              <span class="text-4xl md:text-5xl font-black text-white font-mono">02</span>
-              <h3 class="text-lg font-bold text-cyan-400 mt-2">Top-Tier Degrees</h3>
+              <div class="flex items-baseline justify-between">
+                <span class="text-4xl md:text-5xl font-black text-white font-mono">02</span>
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-cyan-950 text-cyan-400 border border-cyan-800">UEH UNIVERSITY</span>
+              </div>
+              <h3 class="text-lg font-bold text-cyan-400 mt-3">
+                <span class="lang-vi">02 Bằng Cử Nhân Song Ngành</span>
+                <span class="lang-en">02 Top-Tier Degrees</span>
+              </h3>
               <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-                Simultaneously commanding a high-performance Dual Major at the University of Economics Ho Chi Minh City (UEH): <strong>International Business</strong> &amp; <strong>Logistics and Supply Chain Management</strong>.
+                <span class="lang-vi">Theo đuổi đồng thời chương trình Song ngành hiệu suất cao tại Đại học Kinh tế TP.HCM (UEH): <strong>Kinh doanh Quốc tế</strong> &amp; <strong>Logistics và Quản lý Chuỗi cung ứng</strong>.</span>
+                <span class="lang-en">Simultaneously commanding a high-performance Dual Major at the University of Economics Ho Chi Minh City (UEH): <strong>International Business</strong> &amp; <strong>Logistics and Supply Chain Management</strong>.</span>
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs font-mono text-cyan-400">Dual GPA: 3.42 &amp; 3.45 / 4.0</div>
+            <div class="mt-5 pt-3 border-t border-slate-800/80 text-xs font-mono text-cyan-400">
+              <i class="fa-solid fa-graduation-cap mr-1"></i> Dual GPA: 3.42 &amp; 3.45 / 4.0
+            </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 transition flex flex-col justify-between">
+          <div class="p-7 rounded-2xl glass-card border border-slate-800/90 hover:border-emerald-500/50 transition flex flex-col justify-between">
             <div>
-              <span class="text-4xl md:text-5xl font-black text-white font-mono">02</span>
-              <h3 class="text-lg font-bold text-emerald-400 mt-2">Venture Startups</h3>
+              <div class="flex items-baseline justify-between">
+                <span class="text-4xl md:text-5xl font-black text-white font-mono">02</span>
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-400 border border-emerald-800">FOUNDER &amp; OPS</span>
+              </div>
+              <h3 class="text-lg font-bold text-emerald-400 mt-3">
+                <span class="lang-vi">02 Dự Án Khởi Nghiệp Thực Chiến</span>
+                <span class="lang-en">02 Venture Startups</span>
+              </h3>
               <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-                Proven entrepreneurial execution as Founder &amp; Manager, scaling <strong>Unistay</strong> student housing to a 90% occupancy rate (25% net margin) and <strong>EduTynker</strong> to 10,000+ active community members.
+                <span class="lang-vi">Năng lực thực thi khởi nghiệp đã được kiểm chứng ở vai trò Founder &amp; Manager: Vận hành chuỗi lưu trú <strong>Unistay</strong> đạt 90% tỷ lệ lấp đầy (biên lợi nhuận 25%) và mở rộng hệ sinh thái số <strong>EduTynker</strong> vượt 10.000+ thành viên.</span>
+                <span class="lang-en">Proven entrepreneurial execution as Founder &amp; Manager, scaling <strong>Unistay</strong> student housing to a 90% occupancy rate (25% net margin) and <strong>EduTynker</strong> to 10,000+ active community members.</span>
               </p>
             </div>
-            <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs font-mono text-emerald-400">Founder &amp; Operations Lead</div>
+            <div class="mt-5 pt-3 border-t border-slate-800/80 text-xs font-mono text-emerald-400">
+              <i class="fa-solid fa-bolt mr-1"></i> 90% Occupancy &bull; 10,000+ Users
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 1.3 Selected Portfolio Masterpieces with Uploaded Real Photos -->
+      <!-- 1.3 Selected Portfolio Masterpieces -->
       <div class="space-y-6">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.3 &mdash; Selected Portfolio Masterpieces</h2>
-          <span class="text-xs font-mono text-slate-500">HIGHLIGHTED WORKS</span>
+          <span class="text-xs font-mono text-slate-500">LIVE EXPERIENCE &amp; ARCHIVE</span>
         </div>
 
-       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
           <!-- Masterpiece 1: AETERNA -->
-          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between hover:border-amber-500/50 transition group">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800/90 flex flex-col justify-between hover:border-amber-500/60 transition group">
             <div class="space-y-4">
-              <div class="w-full h-48 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-                <img src="SECC.JPG" alt="Project AETERNA" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="relative w-full h-56 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+                <img src="SECC.JPG" data-alt-srcs="secc.jpg,aeterna.jpg" onerror="handleSmartImgError(this)" alt="Project AETERNA" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                <button onclick="openLightbox(this.previousElementSibling.src, 'Project AETERNA — SEA Finalist')" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-lg bg-slate-950/80 hover:bg-amber-500 text-white text-xs flex items-center justify-center transition" title="Phóng to ảnh">
+                  <i class="fa-solid fa-expand"></i>
+                </button>
               </div>
               <div class="flex items-center justify-between">
                 <span class="px-2.5 py-1 text-xs font-mono font-bold bg-amber-950/80 text-amber-400 border border-amber-800/60 rounded">[CASE 01]</span>
-                <span class="text-xs font-mono text-slate-400">SEA Finalist</span>
+                <span class="text-xs font-mono text-amber-300">SEA Division Finalist</span>
               </div>
-              <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition leading-snug">Global Product Marketing &amp; Game Optimization Strategy</h3>
+              <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition leading-snug">
+                Global Product Marketing &amp; Game Optimization Strategy
+              </h3>
               <p class="text-xs font-mono text-amber-400">Project Identity: Project AETERNA</p>
               <div class="space-y-2 text-sm text-slate-300">
                 <p><strong class="text-white">Core Impact:</strong> Preserving the cultural identity, history, and heritage of 11 Southeast Asian countries by finding the intersection between RPG and MMORPG mechanics.</p>
                 <p><strong class="text-white">Strategic Execution:</strong> Integrating and visualizing tangible and intangible heritage and historical heroes into project objects.</p>
               </div>
             </div>
-            <div class="pt-6 mt-6 border-t border-slate-800 flex flex-col gap-2">
-              <a href="https://www.aeternagame.site/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/40 text-xs font-bold transition">
-                <span>Trải nghiệm Live Web: aeternagame.site</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            <div class="pt-5 mt-6 border-t border-slate-800/80 flex flex-col gap-2">
+              <a href="https://www.aeternagame.site/" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-extrabold transition shadow-lg shadow-amber-500/20">
+                <span>Live Experience &rarr; aeternagame.site</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </a>
-              <button onclick="switchTab('cases')" class="text-[11px] font-mono text-slate-400 hover:text-amber-300 text-center transition">
-                &larr; Xem bài phân tích trong Cases
-              </button>
+              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-[11px] font-mono transition">
+                <i class="fa-brands fa-google-drive text-amber-400"></i> Project Slides &amp; Brand Story Drive
+              </a>
             </div>
           </div>
 
           <!-- Masterpiece 2: Cont-Tect -->
-          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between hover:border-blue-500/50 transition group">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800/90 flex flex-col justify-between hover:border-blue-500/60 transition group">
             <div class="space-y-4">
-              <div class="w-full h-48 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-                <img src="Cont-tect.jpg" alt="Cont-Tect Simulation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <div class="relative w-full h-56 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+                <img src="Cont-tect.jpg" data-alt-srcs="cont-tect.jpg,Cont-Tect.jpg" onerror="handleSmartImgError(this)" alt="Cont-Tect Model" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+                <button onclick="openLightbox(this.previousElementSibling.src, 'Cont-Tect Model — Digiport Hackathon 2025')" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-lg bg-slate-950/80 hover:bg-blue-500 text-white text-xs flex items-center justify-center transition" title="Phóng to ảnh">
+                  <i class="fa-solid fa-expand"></i>
+                </button>
               </div>
               <div class="flex items-center justify-between">
                 <span class="px-2.5 py-1 text-xs font-mono font-bold bg-blue-950/80 text-blue-400 border border-blue-800/60 rounded">[CASE 02]</span>
-                <span class="text-xs font-mono text-slate-400">2nd Runner-Up</span>
+                <span class="text-xs font-mono text-blue-300">2nd Runner-Up / 100+ Teams</span>
               </div>
-              <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition leading-snug">Automated Container Defect Inspection Simulation</h3>
+              <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition leading-snug">
+                Automated Container Defect Inspection Simulation
+              </h3>
               <p class="text-xs font-mono text-blue-400">Project Identity: "Cont-Tect" &mdash; Team Motion Masters</p>
               <div class="space-y-2 text-sm text-slate-300">
                 <p><strong class="text-white">Core Impact:</strong> Slashing average container scanning and validation times from 25 minutes down to 5 minutes per container compared to traditional manual checks.</p>
                 <p><strong class="text-white">Strategic Execution:</strong> Formulated an automated inspection solution under a high-pressure 24-hour hackathon to optimize port terminal workflows, outperforming 100+ regional teams.</p>
               </div>
             </div>
-            <div class="pt-6 mt-6 border-t border-slate-800 flex flex-col gap-2">
-              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 border border-blue-500/40 text-xs font-bold transition">
-                <span>Xem Tài liệu / Simulation Drive</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            <div class="pt-5 mt-6 border-t border-slate-800/80 flex flex-col gap-2">
+              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold transition shadow-lg shadow-blue-600/25">
+                <span>Live Experience &rarr; Simulation Drive</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </a>
-              <button onclick="openModal('case-3')" class="text-[11px] font-mono text-slate-400 hover:text-blue-300 text-center transition">
-                &larr; Mở đọc bài viết Case Study
+              <button onclick="openModal('case-3')" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-[11px] font-mono transition">
+                <i class="fa-solid fa-book-open text-blue-400"></i>
+                <span class="lang-vi">Đọc chi tiết bài viết Cont-Tect</span>
+                <span class="lang-en">Read Full Cont-Tect Case Study</span>
               </button>
             </div>
           </div>
 
           <!-- Masterpiece 3: Mealnimals -->
-          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition group">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800/90 flex flex-col justify-between hover:border-emerald-500/60 transition group">
             <div class="space-y-4">
-              <div class="w-full h-48 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
-                <img src="mealnimals.jpg" alt="Mealnimals Platform" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-emerald-950/50 to-slate-950 text-emerald-400 p-4 font-mono text-center\'><i class=\'fa-solid fa-leaf text-4xl mb-2\'></i><span class=\'font-bold text-xs\'>MEALNIMALS PLATFORM</span></div>';">
+              <div class="relative w-full h-56 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
+                <img src="mealnimals.jpg" data-alt-srcs="Mealnimals.jpg,mealnimals.png,lastmile.png" onerror="handleSmartImgError(this)" alt="Mealnimals / GroWarriors" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+                <button onclick="openLightbox(this.previousElementSibling.src, 'Mealnimals / GroWarriors — Champion Startup Zone 2025')" class="absolute top-2.5 right-2.5 w-8 h-8 rounded-lg bg-slate-950/80 hover:bg-emerald-500 text-white text-xs flex items-center justify-center transition" title="Phóng to ảnh">
+                  <i class="fa-solid fa-expand"></i>
+                </button>
               </div>
               <div class="flex items-center justify-between">
                 <span class="px-2.5 py-1 text-xs font-mono font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 rounded">[CASE 03]</span>
-                <span class="text-xs font-mono text-slate-400">Grand Champion</span>
+                <span class="text-xs font-mono text-emerald-300">Grand Champion</span>
               </div>
-              <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition leading-snug">End-to-End Scalable Supply Chain Model</h3>
+              <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition leading-snug">
+                End-to-End Scalable Supply Chain Model
+              </h3>
               <p class="text-xs font-mono text-emerald-400">Project Identity: Mealnimals / GroWarriors</p>
               <div class="space-y-2 text-sm text-slate-300">
                 <p><strong class="text-white">Core Impact:</strong> Formulated an end-to-end business and scalable logistics model, onboarding 500+ active users in month 1 and restructuring workflows to project a 20% net profit margin.</p>
                 <p><strong class="text-white">Strategy Implementation:</strong> Built an intermediary platform connecting merchants with users, evolving from a traditional grocery shopping and food distribution model.</p>
               </div>
             </div>
-            <div class="pt-6 mt-6 border-t border-slate-800 flex flex-col gap-2">
-              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/40 text-xs font-bold transition">
-                <span>Xem Tài liệu / P&amp;L Drive</span>
-                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            <div class="pt-5 mt-6 border-t border-slate-800/80 flex flex-col gap-2">
+              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold transition shadow-lg shadow-emerald-600/25">
+                <span>Live Experience &rarr; P&amp;L &amp; Cost Platform</span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
               </a>
-              <button onclick="openModal('case-1')" class="text-[11px] font-mono text-slate-400 hover:text-emerald-300 text-center transition">
-                &larr; Mở đọc bài viết Case Study
+              <button onclick="openModal('case-1')" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-[11px] font-mono transition">
+                <i class="fa-solid fa-book-open text-emerald-400"></i>
+                <span class="lang-vi">Đọc chi tiết bài viết Mealnimals</span>
+                <span class="lang-en">Read Full Mealnimals Case Study</span>
               </button>
             </div>
           </div>
 
         </div>
+      </div>
 
-      <!-- 1.4 Skills & Tools -->
+      <!-- 1.4 Skills, Tools & Global Credentials -->
       <div class="space-y-6">
         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
           <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.4 &mdash; Skills, Tools &amp; Global Credentials</h2>
           <span class="text-xs font-mono text-slate-500">CAPABILITY MATRIX</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800 space-y-3">
             <div class="text-blue-400 text-sm font-mono font-bold"><i class="fa-solid fa-microchip mr-2"></i>Technical &amp; Soft Skills</div>
             <div class="flex flex-wrap gap-2 pt-1">
-              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Data Analytics (Power BI, SQL, Tableau)</span>
-              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Gemini AI</span>
-              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Incoterms</span>
-              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Cross-Functional Leadership</span>
-              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">High-Stake Negotiation</span>
-              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Conflict Resolution</span>
-              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Public Speaking &amp; Pitching</span>
+              <span class="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Data Analytics (Power BI, SQL, Tableau)</span>
+              <span class="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Gemini AI</span>
+              <span class="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Incoterms &amp; Odoo ERP</span>
+              <span class="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Cross-Functional Leadership</span>
+              <span class="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">High-Stake Negotiation</span>
+              <span class="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Conflict Resolution</span>
+              <span class="px-3 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Public Speaking &amp; Pitching</span>
             </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800 space-y-3">
             <div class="text-emerald-400 text-sm font-mono font-bold"><i class="fa-solid fa-language mr-2"></i>Languages</div>
-            <ul class="space-y-2 text-sm text-slate-300 pt-1">
-              <li class="flex justify-between items-center py-1 border-b border-slate-800/60"><span>Vietnamese</span><span class="font-mono text-xs text-emerald-400">Native</span></li>
-              <li class="flex justify-between items-center py-1 border-b border-slate-800/60"><span>English</span><span class="font-mono text-xs text-blue-400">IELTS C1</span></li>
-              <li class="flex justify-between items-center py-1"><span>Chinese</span><span class="font-mono text-xs text-amber-400">HSK 2</span></li>
+            <ul class="space-y-2.5 text-sm text-slate-300 pt-1">
+              <li class="flex justify-between items-center py-1.5 border-b border-slate-800/60"><span>Vietnamese</span><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-mono text-xs">Native</span></li>
+              <li class="flex justify-between items-center py-1.5 border-b border-slate-800/60"><span>English</span><span class="px-2 py-0.5 rounded bg-blue-950 text-blue-400 font-mono text-xs">IELTS C1</span></li>
+              <li class="flex justify-between items-center py-1.5"><span>Chinese</span><span class="px-2 py-0.5 rounded bg-amber-950 text-amber-400 font-mono text-xs">HSK 2</span></li>
             </ul>
           </div>
 
-          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800 space-y-3">
             <div class="text-purple-400 text-sm font-mono font-bold"><i class="fa-solid fa-certificate mr-2"></i>Certifications</div>
             <ul class="space-y-3 text-sm text-slate-300 pt-1">
-              <li class="flex items-start gap-2">
-                <i class="fa-solid fa-check-circle text-purple-400 mt-1"></i>
+              <li class="flex items-start gap-2.5">
+                <i class="fa-solid fa-circle-check text-purple-400 mt-1"></i>
                 <span><strong>Logistics Operations Specialist</strong> (Tan Minh Tri Academy — TMT OPS &amp; DOCS)</span>
               </li>
-              <li class="flex items-start gap-2">
-                <i class="fa-solid fa-check-circle text-purple-400 mt-1"></i>
+              <li class="flex items-start gap-2.5">
+                <i class="fa-solid fa-circle-check text-purple-400 mt-1"></i>
                 <span><strong>MOS Certification</strong> (Microsoft Office Specialist: Word, Excel, PowerPoint)</span>
               </li>
             </ul>
@@ -296,23 +381,23 @@
           <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.5 &mdash; Contact &amp; Digital Presence</h2>
           <span class="text-xs font-mono text-slate-500">DIRECT CHANNELS</span>
         </div>
-        <div class="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div class="p-6 md:p-8 rounded-2xl glass-card border border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
           <div class="space-y-3 text-sm">
             <p class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-location-dot text-blue-400 w-5"></i> <span><strong>Address:</strong> 473 Hoa Hao St, Dien Hong Ward, Ho Chi Minh City</span></p>
             <p class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-phone text-emerald-400 w-5"></i> <span><strong>Phone:</strong> <a href="tel:0347347538" class="hover:text-white underline">0347347538</a></span></p>
             <p class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-envelope text-amber-400 w-5"></i> <span><strong>Email:</strong> <a href="mailto:duongthetai2013@gmail.com" class="hover:text-white underline">duongthetai2013@gmail.com</a></span></p>
           </div>
           <div class="flex flex-wrap gap-3 md:justify-end">
-            <a href="https://www.linkedin.com/in/taiduong2005" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-blue-950 border border-slate-800 hover:border-blue-500 text-xs font-semibold flex items-center gap-2 transition">
+            <a href="https://www.linkedin.com/in/taiduong2005" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-blue-950 border border-slate-800 hover:border-blue-500 text-xs font-semibold flex items-center gap-2 transition">
               <i class="fa-brands fa-linkedin text-blue-400 text-base"></i> LinkedIn
             </a>
-            <a href="https://www.facebook.com/duongthetai2k5" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-blue-950 border border-slate-800 hover:border-blue-500 text-xs font-semibold flex items-center gap-2 transition">
+            <a href="https://www.facebook.com/duongthetai2k5" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-blue-950 border border-slate-800 hover:border-blue-500 text-xs font-semibold flex items-center gap-2 transition">
               <i class="fa-brands fa-facebook text-blue-500 text-base"></i> Facebook
             </a>
-            <a href="https://www.instagram.com/duongthetai2k5/" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-pink-950 border border-slate-800 hover:border-pink-500 text-xs font-semibold flex items-center gap-2 transition">
+            <a href="https://www.instagram.com/duongthetai2k5/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-pink-950 border border-slate-800 hover:border-pink-500 text-xs font-semibold flex items-center gap-2 transition">
               <i class="fa-brands fa-instagram text-pink-400 text-base"></i> Instagram
             </a>
-            <a href="https://www.tiktok.com/@tai.bao.ban" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-500 text-xs font-semibold flex items-center gap-2 transition">
+            <a href="https://www.tiktok.com/@tai.bao.ban" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-500 text-xs font-semibold flex items-center gap-2 transition">
               <i class="fa-brands fa-tiktok text-white text-base"></i> TikTok
             </a>
           </div>
@@ -330,7 +415,7 @@
       </div>
 
       <!-- 2.1 University Overview -->
-      <div class="p-6 md:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-4">
+      <div class="p-6 md:p-8 rounded-2xl glass-card border border-slate-800 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <h3 class="text-xl font-bold text-white">2.1 &mdash; University Overview: University of Economics Ho Chi Minh City (UEH)</h3>
           <div class="flex gap-2 text-xs font-mono">
@@ -343,7 +428,7 @@
         </p>
       </div>
 
-      <!-- 2.2 Dual GPA -->
+      <!-- 2.2 Dual-Major Cumulative GPA -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-blue-950/40 border border-slate-800 flex items-center justify-between">
           <div>
@@ -374,7 +459,7 @@
         <h3 class="text-xl font-bold text-white">2.3 &mdash; High-Performance Core Courses</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between space-y-4">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex justify-between items-center">
                 <span class="text-xs font-mono text-blue-400">CORE MODULE 01</span>
@@ -387,13 +472,13 @@
               </p>
             </div>
             <div class="pt-3 border-t border-slate-800">
-              <a href="ERP - G3 - CTWINDOW + ODOO.mp4" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-blue-400 hover:text-blue-300">
+              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-blue-400 hover:text-blue-300">
                 <i class="fa-solid fa-circle-play"></i> ERP - G3 - CTWINDOW + ODOO.mp4
               </a>
             </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between space-y-4">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex justify-between items-center">
                 <span class="text-xs font-mono text-purple-400">CORE MODULE 02</span>
@@ -406,13 +491,13 @@
               </p>
             </div>
             <div class="pt-3 border-t border-slate-800">
-              <a href="PUREVIA - IBP FINAL PRJ.pdf" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-purple-400 hover:text-purple-300">
+              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-purple-400 hover:text-purple-300">
                 <i class="fa-solid fa-file-pdf"></i> PUREVIA - IBP FINAL PRJ.pdf
               </a>
             </div>
           </div>
 
-          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between space-y-4">
+          <div class="p-6 rounded-2xl glass-card border border-slate-800 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex justify-between items-center">
                 <span class="text-xs font-mono text-amber-400">CORE MODULE 03</span>
@@ -424,23 +509,26 @@
                 <strong>Execution:</strong> Acted as a C-level executive to operate a virtual global corporation. Applied core business intelligence and logistics strategies to compete in a simulated market, optimizing production, pricing, and distribution to maximize market share.
               </p>
             </div>
-            <div class="pt-3 border-t border-slate-800 text-xs font-mono text-slate-500">
-              <i class="fa-solid fa-globe mr-1"></i> Globus Executive Simulation
+            <div class="pt-3 border-t border-slate-800 text-xs font-mono text-slate-400">
+              <i class="fa-solid fa-globe mr-1 text-amber-400"></i> Globus Executive Simulation
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- 2.4 Scientific Research with Uploaded Images (lastmile.png & KH.png) -->
+      <!-- 2.4 Scientific Research (Full Infographic View + Click to Zoom) -->
       <div class="space-y-6">
         <h3 class="text-xl font-bold text-white">2.4 &mdash; Scientific Research Publications &amp; Awards</h3>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
           <!-- Research 1: lastmile.png -->
-          <div class="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-            <div class="w-full h-56 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-              <img src="lastmile.png" alt="Logistics Xanh Chặng Cuối 3D Concept" class="w-full h-full object-cover">
+          <div class="p-6 md:p-8 rounded-2xl glass-card border border-slate-800 space-y-4">
+            <div class="relative w-full h-64 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center group">
+              <img src="lastmile.png" data-alt-srcs="Lastmile.png,lastmile.jpg" onerror="handleSmartImgError(this)" alt="Logistics Xanh Chặng Cuối" class="w-full h-full object-contain bg-slate-950 group-hover:scale-105 transition duration-500">
+              <button onclick="openLightbox(this.previousElementSibling.src, 'Logistics Xanh Chặng Cuối & Kỷ Nguyên Logistics 5.0')" class="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-slate-950/90 hover:bg-emerald-600 text-white text-xs font-mono flex items-center gap-1.5 border border-slate-700 transition">
+                <i class="fa-solid fa-magnifying-glass-plus"></i> Phóng to Poster
+              </button>
             </div>
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800">Giải Đạt NCKH cấp Trường Kinh doanh (COBRP 2025)</span>
@@ -472,9 +560,12 @@
           </div>
 
           <!-- Research 2: KH.png -->
-          <div class="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-            <div class="w-full h-56 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-              <img src="KH.png" alt="Tâm Lý Hành Vi Gen Z & Thị Trường Hàng Giả Cao Cấp Poster" class="w-full h-full object-cover">
+          <div class="p-6 md:p-8 rounded-2xl glass-card border border-slate-800 space-y-4">
+            <div class="relative w-full h-64 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center group">
+              <img src="KH.png" data-alt-srcs="kh.png,KH.jpg" onerror="handleSmartImgError(this)" alt="Tâm Lý Hành Vi Gen Z Poster" class="w-full h-full object-contain bg-slate-950 group-hover:scale-105 transition duration-500">
+              <button onclick="openLightbox(this.previousElementSibling.src, 'Tâm Lý Hành Vi Gen Z & Thị Trường Hàng Giả Cao Cấp (Giải Nhất COBRP 2025)')" class="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-slate-950/90 hover:bg-amber-600 text-white text-xs font-mono flex items-center gap-1.5 border border-slate-700 transition">
+                <i class="fa-solid fa-magnifying-glass-plus"></i> Phóng to Infographic
+              </button>
             </div>
             <div class="flex items-center justify-between">
               <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-amber-950 text-amber-400 border border-amber-800">Giải Nhất NCKH cấp Trường Kinh doanh (COBRP 2025)</span>
@@ -518,7 +609,10 @@
           <span class="text-xs font-mono uppercase tracking-widest text-blue-400">SECTION 03 // COMPETITION &amp; PROJECT ARCHIVE</span>
           <h2 class="text-3xl md:text-5xl font-black text-white mt-2">14 SELECTED CASE STUDIES</h2>
         </div>
-        <p class="text-sm text-slate-400 max-w-md">Nhấp vào từng dự án để mở trình đọc toàn văn (Tổng quan, Hành trình, Vai trò, Đóng góp kỹ thuật, Kết quả &amp; Bài học tâm đắc).</p>
+        <p class="text-sm text-slate-400 max-w-md">
+          <span class="lang-vi">Nhấp vào từng dự án để mở trình đọc toàn văn (Tổng quan, Hành trình, Vai trò, Đóng góp kỹ thuật, Kết quả &amp; Bài học tâm đắc).</span>
+          <span class="lang-en">Click on any project card to launch the full-text case study reader (Overview, Execution, Role, Key Contributions, Impact &amp; Takeaways).</span>
+        </p>
       </div>
 
       <div id="cases-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
@@ -572,12 +666,32 @@
     <div class="max-w-4xl mx-auto bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-6">
       <div class="sticky top-0 z-10 bg-slate-900/95 backdrop-blur border-b border-slate-800 px-6 py-4 flex items-center justify-between">
         <span id="modal-badge" class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-blue-950 text-blue-400 border border-blue-800">CASE ARCHIVE</span>
-        <button onclick="closeModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-red-600/80 text-slate-300 hover:text-white text-xs font-mono transition">
-          <i class="fa-solid fa-xmark mr-1"></i> Đóng (ESC)
+        <button onclick="closeModal()" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-red-600/80 text-slate-200 hover:text-white text-xs font-mono transition">
+          <i class="fa-solid fa-xmark mr-1"></i> ESC
         </button>
       </div>
       <div id="modal-body" class="p-6 md:p-10 space-y-6 text-slate-200 leading-relaxed"></div>
     </div>
+  </div>
+
+  <!-- ================= FULL-SCREEN IMAGE LIGHTBOX ================= -->
+  <div id="image-lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/95 backdrop-blur-lg flex flex-col items-center justify-center p-4 cursor-zoom-out">
+    <img id="lightbox-img" src="" alt="Full View" class="max-w-full max-h-[85vh] rounded-2xl border border-slate-700 shadow-2xl object-contain">
+    <p id="lightbox-caption" class="mt-3 text-xs font-mono text-slate-300"></p>
+  </div>
+
+  <!-- ================= HIDDEN FILE INPUT FOR DIRECT UPLOAD ================= -->
+  <input type="file" id="direct-img-picker" accept="image/*" class="hidden">
+
+  <!-- ================= LIVE STUDIO TOOLBAR ================= -->
+  <div id="live-editor-toolbar" class="fixed bottom-5 right-5 z-40 flex items-center gap-2 bg-slate-900/95 backdrop-blur-md border border-blue-500/40 p-2 rounded-2xl shadow-2xl font-mono text-xs">
+    <button id="toggle-edit-btn" onclick="toggleEditMode()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition flex items-center gap-2">
+      <i class="fa-solid fa-camera-rotate"></i>
+      <span id="edit-btn-text">Đổi Ảnh / Link Trực Tiếp</span>
+    </button>
+    <button id="save-export-btn" onclick="exportUpdatedHTML()" class="hidden px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition items-center gap-2">
+      <i class="fa-solid fa-download"></i> Xuất file index.html
+    </button>
   </div>
 
   <!-- ================= FOOTER ================= -->
@@ -590,14 +704,61 @@
 
   <!-- ================= SCRIPT & DATABASE ================= -->
   <script>
+    // Cơ chế tự động dò tìm tên file ảnh hoặc hiển thị Poster đồ họa sang trọng nếu chưa tải ảnh lên GitHub
+    function handleSmartImgError(imgEl) {
+      const altList = (imgEl.getAttribute('data-alt-srcs') || '').split(',').map(s => s.trim()).filter(Boolean);
+      const tried = parseInt(imgEl.getAttribute('data-tried') || '0', 10);
+      if (tried < altList.length) {
+        imgEl.setAttribute('data-tried', tried + 1);
+        imgEl.src = altList[tried];
+        return;
+      }
+      // Tạo ảnh SVG Poster chất lượng cao theo tiêu đề dự án để không bao giờ bị icon ảnh lỗi
+      const label = (imgEl.alt || 'PORTFOLIO VISUAL').replace(/["'<>]/g, '');
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0f172a"/>
+            <stop offset="50%" stop-color="#1e1b4b"/>
+            <stop offset="100%" stop-color="#042f2e"/>
+          </linearGradient>
+        </defs>
+        <rect width="800" height="500" fill="url(#g)"/>
+        <circle cx="680" cy="100" r="180" fill="#3b82f6" fill-opacity="0.12"/>
+        <circle cx="120" cy="400" r="180" fill="#10b981" fill-opacity="0.12"/>
+        <text x="50%" y="44%" dominant-baseline="middle" text-anchor="middle" fill="#60a5fa" font-family="monospace" font-size="18" font-weight="bold">DUONG THE TAI // PORTFOLIO ARCHIVE</text>
+        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="24" font-weight="bold">${label.substring(0, 38)}</text>
+        <text x="50%" y="66%" dominant-baseline="middle" text-anchor="middle" fill="#94a3b8" font-family="monospace" font-size="14">[Bấm "Đổi Ảnh Trực Tiếp" góc phải dưới để chọn ảnh từ máy]</text>
+      </svg>`;
+      imgEl.onerror = null;
+      imgEl.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    function openLightbox(src, caption) {
+      event.stopPropagation();
+      const lb = document.getElementById('image-lightbox');
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption || '';
+      lb.classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('image-lightbox').classList.add('hidden');
+    }
+
     const ARCHIVE_DATA = {
       "case-1": {
         badge: "3.1 — QUÁN QUÂN STARTUP ZONE 2025",
+        badge_en: "3.1 — CHAMPION STARTUP ZONE 2025",
         title: "🏆 MEALNIMALS – TỪ BÀI TOÁN LÃNG PHÍ THỰC PHẨM ĐẾN MỘT NỀN TẢNG TẠO GIÁ TRỊ BỀN VỮNG",
+        title_en: "🏆 MEALNIMALS – FROM FOOD WASTE TO A SUSTAINABLE VALUE PLATFORM",
         role: "Trưởng nhóm Tài chính & Vận hành (Finance & Operations Lead)",
         period: "02/2025 – 12/2025 (10 tháng)",
         img: "mealnimals.jpg",
+        altImgs: "lastmile.png,SECC.JPG",
+        fit: "object-cover object-center",
         summary: "Nền tảng trung gian giải quyết bài toán thực phẩm cận hạn (near-expired food), onboard 500+ người dùng ngay tháng đầu tiên, biên lợi nhuận ròng dự phóng 20% và lọt Top 20 Youth Startup Wheel 2026.",
+        summary_en: "Intermediary platform solving near-expired food waste, onboarding 500+ active users in Month 1 with a projected 20% net profit margin and qualifying for Top 20 Youth Startup Wheel 2026.",
         quote: "Sự xuất sắc trong vận hành không nằm ở việc tối ưu một quy trình đơn lẻ, mà nằm ở khả năng xây dựng một hệ sinh thái nơi tất cả các bên cùng tạo ra giá trị cho nhau.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -623,11 +784,16 @@
       },
       "case-2": {
         badge: "3.2 — GEN Z TECHNOPRENEURS 2025 (QUÁN QUÂN)",
+        badge_en: "3.2 — CHAMPION GEN Z TECHNOPRENEURS 2025",
         title: "⚖️ VILAW LEGIS AI – KIẾN TẠO TƯƠNG LAI CỦA TUÂN THỦ PHÁP LÝ BẰNG TRÍ TUỆ NHÂN TẠO",
+        title_en: "⚖️ VILAW LEGIS AI – SHAPING THE FUTURE OF LEGAL COMPLIANCE WITH AI",
         role: "CFO, Operations Lead & Main Presenter",
         period: "10/2025 – 01/2026 (UII Sandbox)",
         img: "vilaw.jpg",
+        altImgs: "SECC.JPG",
+        fit: "object-cover object-top",
         summary: "Trợ lý AI tự động rà soát văn bản, đánh giá rủi ro và kiểm tra mức độ tuân thủ quy định pháp luật cho doanh nghiệp, xuất sắc giành ngôi Quán quân và nhận gói bảo trợ UII Sandbox.",
+        summary_en: "AI LegalTech assistant automating contract review, risk assessment, and regulatory compliance for enterprises; won 1st Place and secured UII Sandbox incubation.",
         quote: "The future of compliance is not more paperwork. It is smarter systems that help businesses move faster, safer and with greater confidence.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -650,11 +816,16 @@
       },
       "case-3": {
         badge: "3.3 — LOGISTICS DIGIPORT 2025 (Á QUÂN 2)",
+        badge_en: "3.3 — 2ND RUNNER-UP LOGISTICS DIGIPORT 2025",
         title: "🚢 CONT-TECT – TÁI ĐỊNH NGHĨA QUY TRÌNH KIỂM TRA CONTAINER BẰNG CẢM BIẾN THÔNG MINH",
+        title_en: "🚢 CONT-TECT – REDEFINING CONTAINER INSPECTION WITH SMART SENSORS & AI",
         role: "Team Leader (Đội Motion Masters)",
         period: "24 giờ Hackathon Cường độ cao (2025)",
         img: "Cont-tect.jpg",
+        altImgs: "cont-tect.jpg,Port.png",
+        fit: "object-cover object-top",
         summary: "Hệ sinh thái kiểm tra hư hỏng container tự động tại cổng cảng bằng cụm cảm biến quang học, siêu âm, cảm biến khí và AI, rút ngắn thời gian kiểm tra từ 25 phút xuống còn 5 phút/container.",
+        summary_en: "Automated container defect detection ecosystem integrating optical, ultrasonic, and gas sensors with AI at port gates, slashing inspection time from 25 minutes to 5 minutes.",
         quote: "Operational excellence is not about moving faster. It is about removing every unnecessary minute from the system.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -676,11 +847,16 @@
       },
       "case-4": {
         badge: "3.4 — SINH VIÊN KINH DOANH SỐ 2025 VECOM (Á QUÂN 2)",
+        badge_en: "3.4 — 2ND RUNNER-UP DIGITAL BUSINESS CONTEST VECOM 2025",
         title: "🥗 MEAL-KIT E-COMMERCE PLATFORM – TỐI ƯU CHUỖI CUNG ỨNG LẠNH CHO TMĐT THỰC PHẨM",
+        title_en: "🥗 MEAL-KIT E-COMMERCE PLATFORM – COLD-CHAIN LOGISTICS OPTIMIZATION",
         role: "Finance & Logistics Strategist",
         period: "11/2025 – 12/2025 (Chung kết toàn quốc tại Hà Nội)",
         img: "mealkit.jpg",
+        altImgs: "lastmile.png",
+        fit: "object-cover object-center",
         summary: "Thiết kế mô hình tài chính (CapEx/OpEx) và mạng lưới Cold-Chain Logistics cho nền tảng thương mại điện tử phân phối gói nguyên liệu sơ chế sẵn Meal-Kit.",
+        summary_en: "Engineered CapEx/OpEx financial models and urban cold-chain fulfillment routing for a national fresh Meal-Kit e-commerce platform.",
         quote: "In fresh-food e-commerce, profitability is important, but preserving quality throughout the supply chain is what truly creates customer trust.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -700,11 +876,16 @@
       },
       "case-5": {
         badge: "3.5 — MANAGEMENT TRAINEE CHALLENGE 2025 (Á QUÂN 2)",
+        badge_en: "3.5 — 2ND RUNNER-UP MANAGEMENT TRAINEE CHALLENGE 2025",
         title: "🏢 MANAGEMENT TRAINEE CHALLENGE – MÔ PHỎNG TÁI CẤU TRÚC DOANH NGHIỆP DƯỚI ÁP LỰC",
+        title_en: "🏢 MANAGEMENT TRAINEE CHALLENGE – CORPORATE TURNAROUND & HIGH-PRESSURE DECISION MAKING",
         role: "Team Lead & CFO",
         period: "11/2025 – 12/2025",
         img: "NSTN-389.jpg",
+        altImgs: "nstn-389.jpg",
+        fit: "object-cover object-top",
         summary: "Dẫn dắt các đội thi liên trường UEH – FTU2 giải quyết chuỗi tình huống khủng hoảng vận hành, nhân sự và tài chính, đưa 100% đội nhóm phụ trách lọt vào Top 3 ở tất cả các chặng.",
+        summary_en: "Led cross-university UEH–FTU2 teams through multi-round corporate crisis simulations, placing 100% of led teams in the Top 3 across every assessment stage.",
         quote: "Numbers tell us what is happening. Leadership turns those numbers into actions that drive results.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -724,11 +905,16 @@
       },
       "case-6": {
         badge: "3.6 — QUÁN QUÂN COOP CHALLENGE 2025",
+        badge_en: "3.6 — GRAND CHAMPION COOP CHALLENGE 2025",
         title: "🌱 OVINA – HIỆN ĐẠI HÓA HỢP TÁC XÃ NÔNG NGHIỆP THEO MÔ HÌNH FARM-TO-TABLE",
+        title_en: "🌱 OVINA – MODERNIZING AGRICULTURAL COOPERATIVES VIA FARM-TO-TABLE SUPPLY CHAIN",
         role: "Team Leader (Quản lý 10 thành viên)",
         period: "2025 (Chi cục Phát triển Nông thôn TP.HCM)",
         img: "ovina.jpg",
+        altImgs: "IBP002.jpg",
+        fit: "object-cover object-top",
         summary: "Tái định hình hợp tác xã nông nghiệp theo chuỗi giá trị farm-to-table khép kín và kinh tế tuần hoàn với sản phẩm kem/gel tẩy tế bào chết từ vỏ trứng tái chế kết hợp nha đam và dầu dừa.",
+        summary_en: "Redesigned traditional agricultural cooperatives into a modern farm-to-table circular ecosystem, leading a 10-member cross-functional team to the Championship.",
         quote: "A stronger supply chain does more than move products. It creates opportunities, empowers producers and builds sustainable communities.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -748,11 +934,16 @@
       },
       "case-7": {
         badge: "3.7 — QUÁN QUÂN YOUPRENEUR LAUNCHPAD STARTUP 2025",
+        badge_en: "3.7 — CHAMPION YOUPRENEUR LAUNCHPAD STARTUP 2025",
         title: "🧱 AGROBRICK – THƯƠNG MẠI HÓA VẬT LIỆU XÂY DỰNG XANH THEO TƯ DUY KINH TẾ TUẦN HOÀN",
+        title_en: "🧱 AGROBRICK – COMMERCIALIZING CIRCULAR GREEN CONSTRUCTION MATERIALS",
         role: "Team Leader & Anchor Presenter (Đội Glowgetters)",
         period: "03/2025 – 04/2025 (FTU2)",
         img: "agrobrick.jpg",
+        altImgs: "SECC.JPG",
+        fit: "object-cover object-top",
         summary: "Phát triển vật liệu xây dựng xanh cách âm, cách nhiệt từ phế thải và phụ phẩm công nghiệp; giành ngôi Quán quân tại FTU2 và lọt Top 20 Youth Startup Wheel 2026.",
+        summary_en: "Commercialized eco-friendly soundproof and thermal-insulating bricks from industrial byproducts; won 1st Place at FTU2 and reached Top 20 Youth Startup Wheel 2026.",
         quote: "The future of supply chains is not only about efficiency. It is about transforming waste into value and sustainability into competitive advantage.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -772,11 +963,16 @@
       },
       "case-8": {
         badge: "3.8 — STARTUP CHALLENGE COMPETITION 2025 (Á QUÂN 2)",
+        badge_en: "3.8 — 2ND RUNNER-UP STARTUP CHALLENGE 2025",
         title: "🌿 SUSTAINABLE COSMETICS – THƯƠNG MẠI HÓA MỸ PHẨM TUẦN HOÀN TỪ NGUYÊN LIỆU TÁI CHẾ",
+        title_en: "🌿 SUSTAINABLE COSMETICS – REVERSE LOGISTICS & CIRCULAR SKINCARE COMMERCIALIZATION",
         role: "Operations & Commercialization Lead",
         period: "2025 (Đại học Tôn Đức Thắng - TDTU)",
         img: "cosmetics.jpg",
+        altImgs: "SECC.JPG",
+        fit: "object-cover object-top",
         summary: "Thiết kế hệ thống Reverse Logistics thu gom vỏ trứng từ các chuỗi bánh ngọt và ứng dụng công nghệ nghiền siêu mịn để thương mại hóa dòng mỹ phẩm thiên nhiên tuần hoàn.",
+        summary_en: "Designed a Reverse Logistics network collecting eggshells from bakery chains and applying ultra-fine grinding technology to commercialize circular skincare products.",
         quote: "Innovation creates possibilities. Operations transform those possibilities into products that can scale and create impact.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -796,11 +992,16 @@
       },
       "case-9": {
         badge: "3.9 — DIGITAL PIONEERS 2025",
+        badge_en: "3.9 — MOST POPULAR TEAM DIGITAL PIONEERS 2025",
         title: "🚚 DỰ ÁN '5T' – MÔ HÌNH PHÂN PHỐI NÔNG SẢN ĐA KÊNH TỪ NÔNG TRẠI ĐẾN BÀN ĂN",
+        title_en: "🚚 PROJECT '5T' – OMNI-CHANNEL FARM-TO-TABLE FRESH PRODUCE DISTRIBUTION",
         role: "Operations Lead",
         period: "2025 (CLB GPA)",
         img: "5t.jpg",
+        altImgs: "lastmile.png",
+        fit: "object-cover object-center",
         summary: "Đồng bộ hóa dữ liệu tồn kho thời gian thực với hoạt động digital marketing và tối ưu chuỗi hoàn tất đơn hàng nông sản tươi sống dưới sự cố vấn của PGS. Hoàng Cửu Long & COO Bánh mì Má Hải.",
+        summary_en: "Synchronized real-time inventory with digital marketing and optimized fresh produce fulfillment under the mentorship of Assoc. Prof. Hoang Cuu Long & COO of Banh Mi Ma Hai.",
         quote: "A supply chain is not judged by how it performs in perfect conditions, but by how resilient it remains when reality becomes unpredictable.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -819,11 +1020,16 @@
       },
       "case-10": {
         badge: "3.11 — Ý TƯỞNG KHỞI NGHIỆP HUTECH 2025",
+        badge_en: "3.11 — NATIONAL CONSOLATION PRIZE HUTECH STARTUP 2025",
         title: "🥥 CAMACO – XÂY DỰNG NỀN TẢNG VẬN HÀNH CHO THƯƠNG HIỆU BƠ PHẾT DINH DƯỠNG CAO CẤP",
+        title_en: "🥥 CAMACO – OPERATIONS FOUNDATION FOR PREMIUM PLANT-BASED NUTRITIONAL SPREAD",
         role: "Core Operations Planner",
         period: "2025 (Đại học HUTECH)",
         img: "camaco.jpg",
+        altImgs: "IBP002.jpg",
+        fit: "object-cover object-top",
         summary: "Thiết lập tiêu chuẩn quản trị tồn kho chống tách lớp tự nhiên và thiết kế quy trình sản xuất batch processing cho dòng bơ phết dừa dẻo, matcha và hạt điều.",
+        summary_en: "Established storage standards to prevent natural oil separation and designed a batch-processing production layout for a coconut-matcha-cashew spread startup.",
         quote: "Great products begin with innovation, but sustainable growth depends on the systems that preserve quality at every stage of the journey.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -841,11 +1047,16 @@
       },
       "case-11": {
         badge: "3.12 — HR REGENZ 2024 (QUÁN QUÂN)",
+        badge_en: "3.12 — GRAND CHAMPION HR REGENZ 2024",
         title: "🏆 HR REGENZ – TÁI CẤU TRÚC BỘ MÁY STARTUP ĐANG TĂNG TRƯỞNG NÓNG",
+        title_en: "🏆 HR REGENZ – ORGANIZATIONAL RESTRUCTURING FOR A HYPER-GROWTH STARTUP",
         role: "Team Leader & Crisis Arbitrator",
         period: "04/2024 (UEH)",
         img: "hr-regenz.jpg",
+        altImgs: "NSTN-389.jpg",
+        fit: "object-cover object-top",
         summary: "Cuộc thi giải case đầu tiên từ năm nhất đại học: Thiết kế lại kiến trúc tổ chức (Organizational Architecture) và hệ thống KPI để triệt tiêu ma sát nội bộ cho startup tăng trưởng nóng.",
+        summary_en: "First-year championship: Redesigned organizational architecture and KPI alignment to eliminate internal friction in a hyper-growth startup.",
         quote: "Every high-performing operation begins with a high-performing organization. Fix the friction inside the system before trying to accelerate it.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -864,11 +1075,16 @@
       },
       "case-12": {
         badge: "3.13 — BRAINWAVE 2024 (QUÁN QUÂN HACKATHON 96H)",
+        badge_en: "3.13 — GRAND CHAMPION BRAINWAVE 96H HACKATHON 2024",
         title: "🌍 SAMSUNG GLOBAL SUPPLY CHAIN RESILIENCE – CHIẾN LƯỢC PHÒNG NGỪA RỦI RO TOÀN CẦU",
+        title_en: "🌍 SAMSUNG GLOBAL SUPPLY CHAIN RESILIENCE – RISK ARCHITECTURE & CONTINUITY",
         role: "Risk Architecture Lead (Đội Innovibe)",
         period: "10/2024 (96 giờ Hackathon)",
         img: "brainwave.jpg",
+        altImgs: "Port.png",
+        fit: "object-cover object-center",
         summary: "Xây dựng ma trận Xác suất – Tác động, thiết kế hành lang cung ứng dự phòng và mô hình kho dự phòng chiến lược (dark-site warehousing) bảo vệ chuỗi cung ứng toàn cầu của Samsung.",
+        summary_en: "Built a Probability–Impact Matrix, backup sourcing corridors, and dark-site warehousing to safeguard Samsung's global high-tech supply chain in a 96-hour hackathon.",
         quote: "The strongest supply chains are not those that never face disruption, but those designed to survive and recover when disruption inevitably arrives.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -887,11 +1103,16 @@
       },
       "case-13": {
         badge: "3.14 — [CASE 15] UEH DEBATE CHAMPIONSHIP 2025 (Á QUÂN 2)",
+        badge_en: "3.14 — 2ND RUNNER-UP UEH DEBATE CHAMPIONSHIP 2025",
         title: "🎤 INTERNATIONAL BUSINESS & MARKETING DEBATE DELEGATION – TƯ DUY PHẢN BIỆN THƯƠNG MẠI QUỐC TẾ",
+        title_en: "🎤 INTERNATIONAL BUSINESS & MARKETING DEBATE DELEGATION – MACRO TRADE POLICY",
         role: "Main Constructive Debater",
         period: "11/2025 (Khoa KDQT - Marketing UEH)",
         img: "debate-ueh.jpg",
+        altImgs: "ER.png",
+        fit: "object-cover object-center",
         summary: "Xây dựng hệ thống lập luận chiến lược về chủ nghĩa bảo hộ thương mại, chính sách thuế quan, FTA và dịch chuyển chuỗi cung ứng toàn cầu.",
+        summary_en: "Formulated high-speed strategic arguments on trade protectionism, tariff policies, FTAs, and global supply chain shifts.",
         quote: "Strong ideas create opportunities. Strong arguments turn those opportunities into impact.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -909,11 +1130,16 @@
       },
       "case-14": {
         badge: "3.15 — EQUAL VOICE DEBATE CHAMPIONSHIP (Á QUÂN 2)",
+        badge_en: "3.15 — 2ND RUNNER-UP EQUAL VOICE DEBATE CHAMPIONSHIP",
         title: "🎭 TRIPLE KILLER – DÙNG TIẾNG NÓI NGƯỜI TRẺ ĐỂ THÚC ĐẨY CÔNG BẰNG XÃ HỘI",
+        title_en: "🎭 TRIPLE KILLER – YOUTH ADVOCACY & CREATIVE PERFORMANCE FOR SOCIAL EQUITY",
         role: "Debater & Performance Artist",
         period: "2025 (Ký túc xá UEH)",
         img: "equal-voice.jpg",
+        altImgs: "Vulva.png",
+        fit: "object-cover object-center",
         summary: "Kết hợp tranh biện học thuật với nghệ thuật kể chuyện, diễn kịch và trình diễn rap trực tiếp tại đêm Chung kết nhằm lan tỏa thông điệp bình đẳng giới và trách nhiệm cộng đồng.",
+        summary_en: "Blended academic debate with live theater and rap performance in the Grand Finale to champion gender equality and community responsibility.",
         quote: "People may remember your data for a moment, but they remember how your story made them feel for a lifetime.",
         content: `
           <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
@@ -932,10 +1158,14 @@
       "venture-1": {
         badge: "[VENTURE 01] — CORE VENTURE",
         title: "🏠 CHUỖI LƯU TRÚ SINH VIÊN UNISTAY: BÀI HỌC ĐẦU TIÊN VỀ XÂY DỰNG DOANH NGHIỆP THỰC SỰ",
+        title_en: "🏠 UNISTAY STUDENT HOUSING: MY FIRST LESSON IN BUILDING A REAL BUSINESS",
         role: "Founder & Manager",
         period: "06/2024 – Hiện tại",
         img: "unistay.jpg",
+        altImgs: "IBP002.jpg",
+        fit: "object-cover object-center",
         summary: "Khảo sát, cải tạo và vận hành chuỗi lưu trú sinh viên tại TP.HCM đạt tỷ lệ lấp đầy gần 90% và duy trì biên lợi nhuận vận hành ổn định 25%.",
+        summary_en: "Sourced, renovated, and operated a student housing chain in HCMC achieving ~90% occupancy and a steady 25% operating profit margin.",
         quote: "Một căn phòng trống không chỉ là một căn phòng trống. Đó là doanh thu của ngày hôm nay sẽ không bao giờ quay trở lại.",
         content: `
           <h4 class="text-lg font-bold text-emerald-400">🚲 Hai Tháng Trước Ngày Khai Trương</h4>
@@ -949,10 +1179,14 @@
       "venture-2": {
         badge: "[VENTURE 02] — CORE VENTURE",
         title: "⚡ EDUTYNKER / TYNKER TUTOR: KIẾN TRÚC HỆ SINH THÁI SỐ 10,000 THÀNH VIÊN",
+        title_en: "⚡ EDUTYNKER / TYNKER TUTOR: ARCHITECTING A 10,000+ MEMBER DIGITAL ECOSYSTEM",
         role: "Founder & Manager",
         period: "09/2022 – 06/2024",
         img: "edutynker.jpg",
+        altImgs: "ER.png",
+        fit: "object-cover object-center",
         summary: "Xây dựng chuỗi cung ứng học liệu số tự động hóa từ năm 17 tuổi, phục vụ 10,000+ thành viên với 6 khóa học chuyên sâu và hơn 20 gói học liệu số hóa.",
+        summary_en: "Built an automated digital learning supply chain at age 17, serving 10,000+ members with 6 specialized courses and 20+ digital resource packages.",
         quote: "Vận hành một chuỗi cung ứng số cho 10,000 người dùng đòi hỏi tính tự động hóa tuyệt đối. Điểm nghẽn không nằm ở kho bãi vật lý, mà nằm ở trải nghiệm click chuột của khách hàng.",
         content: `
           <h4 class="text-lg font-bold text-emerald-400">🌌 Khúc Dạo Đầu & Cơn Ác Mộng Điểm Nghẽn Học Liệu</h4>
@@ -968,10 +1202,14 @@
       "venture-3": {
         badge: "[VENTURE 03] — CORE VENTURE",
         title: "⏱️ CHIẾN DỊCH CRUNCH 30 NGÀY TÁI THIẾT VẬN HÀNH TẠI BRIGHTWAY & VIỆT TRÍ",
+        title_en: "⏱️ 30-DAY CRUNCH CAMPAIGN: REVIVING OPERATIONS AT BRIGHTWAY & VIET TRI",
         role: "Operations & Event Specialist / Marketing Leader",
         period: "08/2024 – 09/2024",
         img: "Brightway & VT.png",
+        altImgs: "brightway.png",
+        fit: "object-contain bg-slate-950",
         summary: "Tái khởi động chi nhánh đóng băng suốt 6 tháng chỉ trong đúng 30 ngày bằng biểu đồ Gantt kỷ luật, đạt 100% On-time Readiness và quy tụ 18 nhân vật chủ chốt trong đêm sự kiện.",
+        summary_en: "Revived a branch frozen for 6 months within a strict 30-day Gantt schedule, achieving 100% On-time Readiness and onboarding 18 key industry participants.",
         quote: "Operations không phải là việc duy trì một cỗ máy đang chạy êm ái trong phòng kính. Nó là bản lĩnh lao vào giữa đống đổ nát, dùng dữ liệu để cô lập điểm chết và hồi sinh dòng chảy giá trị.",
         content: `
           <h4 class="text-lg font-bold text-emerald-400">⏳ Điểm Chết 6 Tháng & Trận Chiến Trên Bản Đồ Gantt</h4>
@@ -989,11 +1227,11 @@
         role: "Head of Volunteer Campaigns | IBP002 - UEH",
         period: "2024 – 2026",
         img: "IBP002.jpg",
+        altImgs: "ibp002.jpg",
+        fit: "object-cover object-top",
         summary: "Dẫn dắt 02 chiến dịch lớn (Xuân Giảng Đường & Trung Thu Tình Nguyện), quản lý toàn diện gây quỹ, thu mua, đóng gói và điều phối vận chuyển vật tư minh bạch 100%.",
         quote: "Dù là một dự án kinh doanh hay một hoạt động xã hội, thành công đều đến từ khả năng kết nối con người, quản lý nguồn lực và biến kế hoạch thành hành động thực tế.",
-        content: `
-          <p>Đảm nhận vai trò Trưởng Ban Tổ chức các chiến dịch tình nguyện lớp IBP002 (Xuân Giảng Đường & Trung Thu Tình Nguyện), trực tiếp lập kế hoạch gây quỹ, làm việc với nhà cung cấp để mua sắm vật phẩm tối ưu chi phí, kiểm đếm tồn kho và điều phối phương tiện vận chuyển đến địa bàn thực hiện an toàn, minh bạch tuyệt đối.</p>
-        `
+        content: `<p>Đảm nhận vai trò Trưởng Ban Tổ chức các chiến dịch tình nguyện lớp IBP002 (Xuân Giảng Đường & Trung Thu Tình Nguyện), trực tiếp lập kế hoạch gây quỹ, làm việc với nhà cung cấp để mua sắm vật phẩm tối ưu chi phí, kiểm đếm tồn kho và điều phối phương tiện vận chuyển đến địa bàn thực hiện an toàn, minh bạch tuyệt đối.</p>`
       },
       "log-2": {
         badge: "[LOG 02] — LEADERSHIP LOG",
@@ -1001,11 +1239,11 @@
         role: "National Media & Brand Ambassador",
         period: "2025",
         img: "vsic-aiesec.jpg",
+        altImgs: "SECC.JPG",
+        fit: "object-cover object-top",
         summary: "Đại diện truyền thông cho VSIC (Cuộc thi Khởi nghiệp Quốc gia) và AIESEC (Heading For The Future), kết nối hàng ngàn sinh viên với cơ hội khởi nghiệp và kỹ năng tương lai.",
         quote: "Truyền thông cộng đồng hiệu quả không bắt đầu từ reach; nó bắt đầu từ sự thấu hiểu người nhận.",
-        content: `
-          <p>Phối hợp với ban tổ chức trung ương mở rộng độ phủ cộng đồng cho VSIC và AIESEC. Trực tiếp chia sẻ kinh nghiệm chuẩn bị hồ sơ, chọn đề tài khởi nghiệp, làm việc nhóm và truyền cảm hứng để hàng ngàn bạn trẻ tự tin bước bước đầu tiên trên hành trình sự nghiệp.</p>
-        `
+        content: `<p>Phối hợp với ban tổ chức trung ương mở rộng độ phủ cộng đồng cho VSIC và AIESEC. Trực tiếp chia sẻ kinh nghiệm chuẩn bị hồ sơ, chọn đề tài khởi nghiệp, làm việc nhóm và truyền cảm hứng để hàng ngàn bạn trẻ tự tin bước bước đầu tiên trên hành trình sự nghiệp.</p>`
       },
       "log-3": {
         badge: "[LOG 03] — LEADERSHIP LOG",
@@ -1013,11 +1251,11 @@
         role: "Best Collaborator & External Affairs Member",
         period: "2023 – 2024",
         img: "hrs-ueh.jpg",
+        altImgs: "NSTN-389.jpg",
+        fit: "object-cover object-top",
         summary: "Vinh danh Thành viên Xuất sắc nhất Ban Đối ngoại, trực tiếp xây dựng proposal, thương lượng gói tài trợ doanh nghiệp và quản lý nguồn lực tài chính cho các sự kiện lớn tại UEH.",
         quote: "Một mối quan hệ hợp tác bền vững không được xây dựng bằng việc 'xin tài trợ', mà bằng việc tạo ra giá trị đủ lớn để doanh nghiệp muốn tiếp tục đồng hành.",
-        content: `
-          <p>Làm việc trực tiếp với Chủ tịch CLB, các trưởng dự án và đại diện doanh nghiệp để thiết lập quan hệ đối tác dài hạn, đàm phán quyền lợi tài trợ hai chiều và quản lý giải trình ngân sách minh bạch cho các chương trình học thuật tại UEH.</p>
-        `
+        content: `<p>Làm việc trực tiếp với Chủ tịch CLB, các trưởng dự án và đại diện doanh nghiệp để thiết lập quan hệ đối tác dài hạn, đàm phán quyền lợi tài trợ hai chiều và quản lý giải trình ngân sách minh bạch cho các chương trình học thuật tại UEH.</p>`
       },
       "log-4": {
         badge: "[LOG 04] — LEADERSHIP LOG",
@@ -1025,11 +1263,11 @@
         role: "Trưởng ban Tài chính Đối ngoại (External Finance Department Leader)",
         period: "2022",
         img: "lae.jpg",
+        altImgs: "IBP002.jpg",
+        fit: "object-cover object-top",
         summary: "Thiết lập cấu trúc chi phí nghiêm ngặt và hệ thống báo cáo tài chính minh bạch theo thời gian thực (Real-time Financial Reporting), vượt chỉ tiêu ngân sách với 0% độ trễ phân phối.",
         quote: "Tiền chỉ chảy về nơi có quy trình quản trị đủ minh bạch, và dòng vốn chỉ được giải phóng hiệu quả khi hệ thống kiểm soát chi phí không có một lỗ hổng nào.",
-        content: `
-          <p>Áp dụng tư duy kiểm toán doanh nghiệp vào tổ chức phi lợi nhuận: bóc tách cấu trúc chi phí, gác cổng dòng vào tự động, chuẩn hóa phê duyệt dòng ra đa tầng và công khai báo cáo tài chính thời gian thực, giúp chiến dịch vượt xa chỉ tiêu vốn dự kiến với 0% độ trễ giải ngân.</p>
-        `
+        content: `<p>Áp dụng tư duy kiểm toán doanh nghiệp vào tổ chức phi lợi nhuận: bóc tách cấu trúc chi phí, gác cổng dòng vào tự động, chuẩn hóa phê duyệt dòng ra đa tầng và công khai báo cáo tài chính thời gian thực, giúp chiến dịch vượt xa chỉ tiêu vốn dự kiến với 0% độ trễ giải ngân.</p>`
       },
       "log-5": {
         badge: "[LOG 05] — LEADERSHIP LOG",
@@ -1037,11 +1275,11 @@
         role: "PR Member & External Relations Leader",
         period: "2022",
         img: "Vulva.png",
+        altImgs: "vulva.png",
+        fit: "object-contain bg-slate-950",
         summary: "Hợp tác quốc tế cùng đối tác Tây Ban Nha, dẫn dắt hoạt động đối ngoại và đồng bộ hóa thông điệp truyền thông đa văn hóa nhằm tạo không gian đối thoại cởi mở cho cộng đồng.",
         quote: "Mọi thay đổi xã hội đều bắt đầu từ một cuộc trò chuyện, và truyền thông chính là cách để những cuộc trò chuyện đó được bắt đầu.",
-        content: `
-          <p>Kết nối các tổ chức thanh niên và đồng bộ hóa chiến lược truyền thông cho dự án hợp tác quốc tế từ Tây Ban Nha, đảm bảo sự tinh tế văn hóa và tính nhất quán của thông điệp trên toàn bộ các kênh tiếp cận.</p>
-        `
+        content: `<p>Kết nối các tổ chức thanh niên và đồng bộ hóa chiến lược truyền thông cho dự án hợp tác quốc tế từ Tây Ban Nha, đảm bảo sự tinh tế văn hóa và tính nhất quán của thông điệp trên toàn bộ các kênh tiếp cận.</p>`
       },
       "log-6": {
         badge: "[LOG 06] — LEADERSHIP LOG",
@@ -1049,11 +1287,11 @@
         role: "Head of Logistics",
         period: "2022",
         img: "crocuses.jpg",
+        altImgs: "lastmile.png",
+        fit: "object-cover object-center",
         summary: "Điều phối toàn diện chuỗi hậu cần từ thu mua, kiểm kho, phân bổ tải trọng xe đến khảo sát lộ trình vùng sâu vùng xa tại Bình Thuận, đạt 100% tiến độ và 0% sự cố hậu cần.",
         quote: "Logistics is not only about moving goods. At its best, it is about delivering impact where it matters most.",
-        content: `
-          <p>Quản lý trọn vẹn vòng đời hậu cần thiện nguyện: Procurement & Inventory Management, Routing & Transportation Planning cho địa hình vùng sâu vùng xa và Field Operations Coordination, hoàn thành 100% kế hoạch phân phối mà không phát sinh bất kỳ thất thoát hay chậm trễ nào.</p>
-        `
+        content: `<p>Quản lý trọn vẹn vòng đời hậu cần thiện nguyện: Procurement & Inventory Management, Routing & Transportation Planning cho địa hình vùng sâu vùng xa và Field Operations Coordination, hoàn thành 100% kế hoạch phân phối mà không phát sinh bất kỳ thất thoát hay chậm trễ nào.</p>`
       },
       "journal-1": {
         badge: "JOURNAL 01 // DIGITAL SUPPLY CHAIN",
@@ -1152,29 +1390,37 @@
     const logKeys = ["log-1","log-2","log-3","log-4","log-5","log-6"];
     const journalKeys = ["journal-1","journal-2","journal-3","journal-4","journal-5"];
 
+    let currentLang = localStorage.getItem('site_lang') || 'vi';
+
     function renderArchive() {
+      const isEn = currentLang === 'en';
+
       // 1. Cases Grid
       const casesGrid = document.getElementById('cases-grid');
       casesGrid.innerHTML = caseKeys.map(k => {
         const item = ARCHIVE_DATA[k];
+        const title = (isEn && item.title_en) ? item.title_en : item.title;
+        const summary = (isEn && item.summary_en) ? item.summary_en : item.summary;
+        const badge = (isEn && item.badge_en) ? item.badge_en : item.badge;
+        const fitClass = item.fit || 'object-cover object-top';
         return `
-          <div onclick="openModal('${k}')" class="cursor-pointer p-6 rounded-2xl bg-slate-900/75 border border-slate-800 hover:border-blue-500/70 transition group flex flex-col justify-between">
+          <div onclick="openModal('${k}')" class="cursor-pointer p-6 rounded-2xl glass-card border border-slate-800/90 hover:border-blue-500/70 transition group flex flex-col justify-between">
             <div class="space-y-4">
-              <div class="w-full h-44 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
-                <img src="${item.img || ''}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-blue-950/40 text-blue-400 p-4 font-mono text-center\'><i class=\'fa-solid fa-trophy text-3xl mb-1.5\'></i><span class=\'font-bold text-xs truncate max-w-[200px]\'>${item.title.split('–')[0]}</span></div>';">
+              <div class="relative w-full h-52 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
+                <img src="${item.img || ''}" data-key="${k}" data-alt-srcs="${item.altImgs || ''}" onerror="handleSmartImgError(this)" alt="${title}" class="w-full h-full ${fitClass} group-hover:scale-105 transition duration-500">
               </div>
               <div class="space-y-2">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-blue-950/90 text-blue-400 border border-blue-800/70">${item.badge}</span>
+                  <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-blue-950/90 text-blue-400 border border-blue-800/70">${badge}</span>
                   <span class="text-xs font-mono text-slate-500">${item.period}</span>
                 </div>
-                <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition leading-snug">${item.title}</h3>
+                <h3 class="text-lg font-bold text-white group-hover:text-blue-400 transition leading-snug">${title}</h3>
                 <p class="text-xs font-mono text-emerald-400">Role: ${item.role}</p>
-                <p class="text-sm text-slate-400 leading-relaxed">${item.summary}</p>
+                <p class="text-sm text-slate-400 leading-relaxed">${summary}</p>
               </div>
             </div>
             <div class="pt-4 mt-5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-blue-400">
-              <span>Đọc toàn bộ hồ sơ Case Study</span>
+              <span>${isEn ? 'Read Full Case Study' : 'Đọc toàn bộ hồ sơ Case Study'}</span>
               <i class="fa-solid fa-arrow-up-right-from-square group-hover:translate-x-0.5 transition"></i>
             </div>
           </div>
@@ -1185,22 +1431,25 @@
       const venturesGrid = document.getElementById('ventures-grid');
       venturesGrid.innerHTML = ventureKeys.map(k => {
         const item = ARCHIVE_DATA[k];
+        const title = (isEn && item.title_en) ? item.title_en : item.title;
+        const summary = (isEn && item.summary_en) ? item.summary_en : item.summary;
+        const fitClass = item.fit || 'object-cover object-top';
         return `
-          <div onclick="openModal('${k}')" class="cursor-pointer p-6 rounded-2xl bg-gradient-to-b from-slate-900 to-slate-900/60 border border-slate-800 hover:border-emerald-500/70 transition group flex flex-col justify-between">
+          <div onclick="openModal('${k}')" class="cursor-pointer p-6 rounded-2xl glass-card border border-slate-800/90 hover:border-emerald-500/70 transition group flex flex-col justify-between">
             <div class="space-y-4">
-              <div class="w-full h-44 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
-                <img src="${item.img || ''}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-emerald-950/30 to-slate-950 text-emerald-400 p-4 font-mono text-center\'><i class=\'fa-solid fa-chart-line text-3xl mb-1.5\'></i><span class=\'font-bold text-xs\'>${item.badge}</span></div>';">
+              <div class="relative w-full h-48 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
+                <img src="${item.img || ''}" data-key="${k}" data-alt-srcs="${item.altImgs || ''}" onerror="handleSmartImgError(this)" alt="${title}" class="w-full h-full ${fitClass} group-hover:scale-105 transition duration-500">
               </div>
               <div class="space-y-2">
                 <span class="px-2.5 py-1 rounded text-[11px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">${item.badge}</span>
-                <h4 class="text-lg font-bold text-white group-hover:text-emerald-400 transition leading-snug">${item.title}</h4>
+                <h4 class="text-lg font-bold text-white group-hover:text-emerald-400 transition leading-snug">${title}</h4>
                 <p class="text-xs font-mono text-slate-400">${item.role} &bull; ${item.period}</p>
-                <p class="text-sm text-slate-300 leading-relaxed">${item.summary}</p>
+                <p class="text-sm text-slate-300 leading-relaxed">${summary}</p>
                 <blockquote class="p-3 rounded-xl bg-slate-950/80 border-l-2 border-emerald-500 text-xs italic text-slate-400">"${item.quote}"</blockquote>
               </div>
             </div>
             <div class="pt-4 mt-5 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-emerald-400">
-              <span>Đọc hồi ký vận hành đầy đủ</span>
+              <span>${isEn ? 'Read Full Operations Memoir' : 'Đọc hồi ký vận hành đầy đủ'}</span>
               <i class="fa-solid fa-book-open"></i>
             </div>
           </div>
@@ -1211,11 +1460,12 @@
       const logsGrid = document.getElementById('logs-grid');
       logsGrid.innerHTML = logKeys.map(k => {
         const item = ARCHIVE_DATA[k];
+        const fitClass = item.fit || 'object-cover object-top';
         return `
-          <div onclick="openModal('${k}')" class="cursor-pointer p-5 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/60 transition group flex flex-col justify-between">
+          <div onclick="openModal('${k}')" class="cursor-pointer p-5 rounded-2xl glass-card border border-slate-800 hover:border-blue-500/60 transition group flex flex-col justify-between">
             <div class="space-y-3">
-              <div class="w-full h-32 rounded-lg overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
-                <img src="${item.img || ''}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-950/30 to-slate-950 text-blue-400 p-2 font-mono text-center\'><i class=\'fa-solid fa-users text-2xl mb-1\'></i><span class=\'font-bold text-[11px]\'>${item.badge}</span></div>';">
+              <div class="w-full h-40 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
+                <img src="${item.img || ''}" data-key="${k}" data-alt-srcs="${item.altImgs || ''}" onerror="handleSmartImgError(this)" alt="${item.title}" class="w-full h-full ${fitClass} group-hover:scale-105 transition duration-500">
               </div>
               <div class="space-y-1.5">
                 <div class="flex justify-between items-center text-[11px] font-mono text-blue-400">
@@ -1228,23 +1478,23 @@
               </div>
             </div>
             <div class="pt-3 mt-4 border-t border-slate-800/80 text-xs font-mono text-blue-400 flex justify-between items-center">
-              <span>Xem chi tiết Impact</span>
+              <span>${isEn ? 'View Impact Details' : 'Xem chi tiết Impact'}</span>
               <span>&rarr;</span>
             </div>
           </div>
         `;
       }).join('');
 
-      // 4. Journal List with Graphics
+      // 4. Journal List
       const journalList = document.getElementById('journal-list');
       journalList.innerHTML = journalKeys.map(k => {
         const item = ARCHIVE_DATA[k];
         return `
-          <div onclick="openModal('${k}')" class="cursor-pointer p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/70 transition group">
+          <div onclick="openModal('${k}')" class="cursor-pointer p-6 md:p-8 rounded-2xl glass-card border border-slate-800 hover:border-amber-500/70 transition group">
             <div class="flex flex-col lg:flex-row gap-6 items-start">
               ${item.img ? `
-                <div class="w-full lg:w-72 h-44 shrink-0 rounded-xl overflow-hidden border border-slate-800 bg-slate-950">
-                  <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <div class="w-full lg:w-80 h-52 shrink-0 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 flex items-center justify-center">
+                  <img src="${item.img}" data-key="${k}" onerror="handleSmartImgError(this)" alt="${item.title}" class="w-full h-full object-contain bg-slate-950 group-hover:scale-105 transition duration-500">
                 </div>
               ` : ''}
               <div class="flex-1 space-y-3">
@@ -1256,7 +1506,7 @@
                 <p class="text-sm text-slate-300 leading-relaxed">${item.summary}</p>
                 <blockquote class="pl-4 border-l-2 border-amber-500 text-xs md:text-sm italic text-slate-400">"${item.quote}"</blockquote>
                 <div class="pt-2 flex items-center gap-2 text-xs font-mono text-amber-400">
-                  <span>Đọc bài phân tích chuyên sâu toàn văn</span>
+                  <span>${isEn ? 'Read Full Strategic Monograph' : 'Đọc bài phân tích chuyên sâu toàn văn'}</span>
                   <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
                 </div>
               </div>
@@ -1264,6 +1514,24 @@
           </div>
         `;
       }).join('');
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.setAttribute('data-lang', lang);
+      localStorage.setItem('site_lang', lang);
+
+      const btnVi = document.getElementById('lang-btn-vi');
+      const btnEn = document.getElementById('lang-btn-en');
+      if (btnVi && btnEn) {
+        btnVi.className = lang === 'vi'
+          ? "px-2.5 py-1 rounded-md font-bold transition bg-blue-600 text-white"
+          : "px-2.5 py-1 rounded-md font-semibold transition text-slate-400 hover:text-white";
+        btnEn.className = lang === 'en'
+          ? "px-2.5 py-1 rounded-md font-bold transition bg-blue-600 text-white"
+          : "px-2.5 py-1 rounded-md font-semibold transition text-slate-400 hover:text-white";
+      }
+      renderArchive();
     }
 
     let isAllMode = false;
@@ -1289,28 +1557,28 @@
 
     function toggleAllMode() {
       isAllMode = !isAllMode;
-      const btn = document.getElementById('all-mode-btn');
       if (isAllMode) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.add('active'));
-        btn.innerHTML = '<i class="fa-solid fa-table-columns mr-1"></i> Xem theo Tab';
       } else {
         switchTab('index');
-        btn.innerHTML = '<i class="fa-solid fa-layer-group mr-1"></i> Xem tất cả';
       }
     }
 
     function openModal(key) {
+      if (isEditing) return;
       const item = ARCHIVE_DATA[key];
       if (!item) return;
-      document.getElementById('modal-badge').textContent = item.badge;
+      const isEn = currentLang === 'en';
+      const title = (isEn && item.title_en) ? item.title_en : item.title;
+      document.getElementById('modal-badge').textContent = (isEn && item.badge_en) ? item.badge_en : item.badge;
       document.getElementById('modal-body').innerHTML = `
         ${item.img ? `
-          <div class="w-full max-h-[480px] rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 mb-6 flex items-center justify-center">
-            <img src="${item.img}" alt="${item.title}" class="w-full h-full object-contain">
+          <div class="w-full max-h-[460px] rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 mb-6 flex items-center justify-center">
+            <img src="${item.img}" onerror="handleSmartImgError(this)" alt="${title}" class="w-full max-h-[460px] object-contain">
           </div>
         ` : ''}
         <div class="space-y-2 border-b border-slate-800 pb-6">
-          <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">${item.title}</h2>
+          <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">${title}</h2>
           <p class="text-sm font-mono text-emerald-400">${item.role} &bull; ${item.period}</p>
         </div>
         <div class="space-y-4 text-sm md:text-base text-slate-300 leading-relaxed">
@@ -1329,25 +1597,9 @@
       document.body.style.overflow = 'auto';
     }
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    renderArchive();
-  </script>
-        <!-- ================= LIVE VISUAL EDITOR TOOLKIT ================= -->
-  <div id="live-editor-toolbar" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-slate-900/95 backdrop-blur-md border border-blue-500/50 p-2 rounded-2xl shadow-2xl font-mono text-xs">
-    <button id="toggle-edit-btn" onclick="toggleEditMode()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition flex items-center gap-2">
-      <i class="fa-solid fa-wand-magic-sparkles"></i>
-      <span id="edit-btn-text">Bật Chế độ Sửa</span>
-    </button>
-    <button id="save-export-btn" onclick="exportUpdatedHTML()" class="hidden px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition items-center gap-2">
-      <i class="fa-solid fa-floppy-disk"></i> Tải file index.html mới
-    </button>
-  </div>
-
-  <script>
+    // ================= UPGRADED LIVE VISUAL STUDIO (DIRECT COMPUTER UPLOAD + COMPRESSION) =================
     let isEditing = false;
+    let activeTargetImg = null;
 
     function toggleEditMode() {
       isEditing = !isEditing;
@@ -1357,91 +1609,105 @@
 
       if (isEditing) {
         btn.classList.replace('bg-blue-600', 'bg-amber-600');
-        text.textContent = 'Đang bật Sửa (Bấm để Tắt)';
+        text.textContent = 'Đang Sửa (Click vào Ảnh bất kỳ để đổi)';
         saveBtn.classList.remove('hidden');
         saveBtn.classList.add('inline-flex');
-        enableVisualEditing();
+        attachImagePickers();
       } else {
         btn.classList.replace('bg-amber-600', 'bg-blue-600');
-        text.textContent = 'Bật Chế độ Sửa';
+        text.textContent = 'Đổi Ảnh / Link Trực Tiếp';
         saveBtn.classList.add('hidden');
         saveBtn.classList.remove('inline-flex');
-        disableVisualEditing();
+        detachImagePickers();
       }
     }
 
-    function enableVisualEditing() {
-      // 1. Quản lý Ảnh: Click để đổi ảnh
+    function attachImagePickers() {
       document.querySelectorAll('img').forEach(img => {
-        img.style.outline = '3px dashed #3b82f6';
+        img.style.outline = '3px dashed #f59e0b';
         img.style.cursor = 'pointer';
-        img.title = 'Bấm vào để đổi ảnh này';
         img.onclick = (e) => {
-          e.stopPropagation();
-          const choice = prompt('CHỌN CÁCH ĐỔI ẢNH:\n- Cách 1: Dán đường link ảnh online (https://...)\n- Cách 2: Gõ tên file đã up trên GitHub (vd: SECC.JPG, avatar.jpg)\n\nNhập link hoặc tên file vào ô dưới:', img.getAttribute('src'));
-          if (choice && choice.trim() !== '') {
-            img.src = choice.trim();
-            img.removeAttribute('srcset');
-            alert('Đã cập nhật ảnh thành công!');
-          }
-        };
-      });
-
-      // 2. Quản lý Nút & Link: Click để đổi link hoặc xóa
-      document.querySelectorAll('a, button:not(#toggle-edit-btn):not(#save-export-btn)').forEach(el => {
-        el.style.outline = '2px dashed #10b981';
-        el.setAttribute('data-old-onclick', el.getAttribute('onclick') || '');
-        
-        el.oncontextmenu = (e) => {
           e.preventDefault();
-          if (confirm('Bạn có chắc muốn XÓA nút/phần tử này khỏi web không?')) {
-            el.remove();
+          e.stopPropagation();
+          activeTargetImg = img;
+          const useFile = confirm('Bấm OK để CHỌN ẢNH TRỰC TIẾP TỪ MÁY TÍNH của bạn (Tự động nén nhẹ & nhúng vào web).\n\nHoặc bấm Hủy (Cancel) nếu bạn muốn gõ tên file/link ảnh.');
+          if (useFile) {
+            document.getElementById('direct-img-picker').click();
+          } else {
+            const manual = prompt('Nhập tên file trên GitHub (vd: SECC.JPG) hoặc dán link ảnh:', img.getAttribute('src'));
+            if (manual && manual.trim()) {
+              applyImageUpdate(img, manual.trim());
+            }
           }
         };
-
-        if (el.tagName.toLowerCase() === 'a') {
-          el.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const newLink = prompt('SỬA LINK ĐÍCH (URL):\nDán link mới (vd: https://www.aeternagame.site/ hoặc link Drive):', el.getAttribute('href') || '');
-            if (newLink !== null) {
-              el.setAttribute('href', newLink.trim());
-              alert('Đã cập nhật link thành công!');
-            }
-          };
-        }
       });
     }
 
-    function disableVisualEditing() {
+    function detachImagePickers() {
       document.querySelectorAll('img').forEach(img => {
         img.style.outline = '';
         img.style.cursor = '';
         img.onclick = null;
       });
-      document.querySelectorAll('a, button').forEach(el => {
-        el.style.outline = '';
-        el.oncontextmenu = null;
-      });
+    }
+
+    document.getElementById('direct-img-picker').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file || !activeTargetImg) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const tempImg = new Image();
+        tempImg.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxW = 960;
+          let w = tempImg.width;
+          let h = tempImg.height;
+          if (w > maxW) { h = Math.round(h * (maxW / w)); w = maxW; }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(tempImg, 0, 0, w, h);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          applyImageUpdate(activeTargetImg, compressedDataUrl);
+        };
+        tempImg.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+      e.target.value = '';
+    });
+
+    function applyImageUpdate(imgEl, newSrc) {
+      imgEl.src = newSrc;
+      const dataKey = imgEl.getAttribute('data-key');
+      if (dataKey && ARCHIVE_DATA[dataKey]) {
+        ARCHIVE_DATA[dataKey].img = newSrc;
+      }
     }
 
     function exportUpdatedHTML() {
-      disableVisualEditing();
-      // Thu dọn toolbar tạm thời trước khi tải mã về
-      const toolbar = document.getElementById('live-editor-toolbar');
-      const clonedDoc = document.documentElement.cloneNode(true);
-      
-      const blob = new Blob(['<!DOCTYPE html>\n' + clonedDoc.outerHTML], { type: 'text/html;charset=utf-8' });
+      detachImagePickers();
+      isEditing = false;
+      document.getElementById('toggle-edit-btn').classList.replace('bg-amber-600', 'bg-blue-600');
+      document.getElementById('edit-btn-text').textContent = 'Đổi Ảnh / Link Trực Tiếp';
+      document.getElementById('save-export-btn').classList.add('hidden');
+
+      const blob = new Blob(['<!DOCTYPE html>\n' + document.documentElement.outerHTML], { type: 'text/html;charset=utf-8' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = 'index.html';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      
-      alert('Đã tải file index.html mới về máy! Bạn chỉ cần vào GitHub, bấm Upload files và kéo thả file index.html vừa tải vào để lưu.');
-      toggleEditMode();
     }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeLightbox();
+      }
+    });
+
+    setLanguage(currentLang);
   </script>
 </body>
 </html>
