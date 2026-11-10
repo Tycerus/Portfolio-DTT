@@ -3,187 +3,936 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dương Thế Tài | Portfolio</title>
+  <title>Dương Thế Tài (2005) | Supply Chain & Operations Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #020617; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white">
 
-  <!-- Navbar -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80">
-    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-        <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
-        Dương Thế Tài
-      </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-        <a href="#about" class="hover:text-blue-400 transition">Giới thiệu</a>
-        <a href="#projects" class="hover:text-blue-400 transition">Dự án</a>
-        <a href="#experience" class="hover:text-blue-400 transition">Kinh nghiệm</a>
-        <a href="#contact" class="hover:text-blue-400 transition">Liên hệ</a>
+  <!-- TOP NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/85 border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+      <button onclick="switchTab('index')" class="text-left group flex items-center gap-3">
+        <span class="w-3 h-3 rounded-full bg-blue-500 ring-4 ring-blue-500/20 group-hover:bg-emerald-400 transition"></span>
+        <div>
+          <span class="text-sm md:text-base font-extrabold tracking-tight text-white block leading-none">DUONG THE TAI</span>
+          <span class="text-[10px] font-mono text-slate-400 tracking-widest uppercase">Supply Chain & Ops</span>
+        </div>
+      </button>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden lg:flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800">
+        <button onclick="switchTab('index')" id="nav-index" class="nav-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold transition bg-blue-600 text-white">01. INDEX</button>
+        <button onclick="switchTab('academics')" id="nav-academics" class="nav-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold transition text-slate-400 hover:text-white">02. ACADEMICS</button>
+        <button onclick="switchTab('cases')" id="nav-cases" class="nav-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold transition text-slate-400 hover:text-white">03. CASES (14)</button>
+        <button onclick="switchTab('ventures')" id="nav-ventures" class="nav-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold transition text-slate-400 hover:text-white">04. VENTURES</button>
+        <button onclick="switchTab('journal')" id="nav-journal" class="nav-btn px-4 py-1.5 rounded-lg text-xs font-mono font-semibold transition text-slate-400 hover:text-white">05. JOURNAL</button>
       </nav>
-      <a href="#contact" class="px-4 py-2 text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition shadow-lg shadow-blue-600/20">
-        Kết nối ngay
-      </a>
+
+      <div class="flex items-center gap-2">
+        <button onclick="toggleAllMode()" id="all-mode-btn" class="px-3 py-1.5 text-xs font-mono text-slate-300 bg-slate-900 hover:bg-slate-800 border border-slate-700 rounded-lg transition" title="Chuyển chế độ xem toàn trang">
+          <i class="fa-solid fa-layer-group mr-1"></i> Xem tất cả
+        </button>
+        <a href="mailto:duongthetai2013@gmail.com" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition shadow-lg shadow-blue-600/20">
+          <i class="fa-regular fa-paper-plane"></i> Liên hệ
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Bar -->
+    <div class="lg:hidden flex overflow-x-auto gap-1 px-4 py-2 bg-slate-900/95 border-t border-slate-800/80 text-xs font-mono">
+      <button onclick="switchTab('index')" id="mnav-index" class="mnav-btn shrink-0 px-3 py-1 rounded-md bg-blue-600 text-white font-semibold">01. INDEX</button>
+      <button onclick="switchTab('academics')" id="mnav-academics" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">02. ACADEMICS</button>
+      <button onclick="switchTab('cases')" id="mnav-cases" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">03. CASES</button>
+      <button onclick="switchTab('ventures')" id="mnav-ventures" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">04. VENTURES</button>
+      <button onclick="switchTab('journal')" id="mnav-journal" class="mnav-btn shrink-0 px-3 py-1 rounded-md text-slate-400">05. JOURNAL</button>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-6 py-12 md:py-20 space-y-24">
-    <!-- Hero Section -->
-    <section id="about" class="flex flex-col items-start gap-6">
-      <div class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-blue-400 bg-blue-950/50 border border-blue-800/60 rounded-full">
-        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-        International Business & Logistics Enthusiast
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16 space-y-20">
+
+    <!-- ==========================================
+         SECTION 1: INDEX (HỒ SƠ & TỔNG QUAN)
+    =========================================== -->
+    <section id="sec-index" class="tab-content active space-y-16">
+      
+      <!-- 1.1 Editorial Biography & Profile -->
+      <div class="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-blue-950/30 border border-slate-800 overflow-hidden">
+        <div class="max-w-3xl space-y-6 relative z-10">
+          <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-blue-950/80 border border-blue-800/70 text-blue-400 text-xs font-mono">
+            <span>EDITORIAL BIOGRAPHY & PROFILE</span>
+            <span>&bull;</span>
+            <span>BORN 2005</span>
+          </div>
+          <div>
+            <h1 class="text-4xl md:text-6xl font-black tracking-tight text-white">DUONG THE TAI <span class="text-slate-500 font-light">(2005)</span></h1>
+            <p class="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 mt-2">
+              Supply Chain &amp; Operations Trainee Candidate
+            </p>
+          </div>
+          <p class="text-slate-300 text-base md:text-lg leading-relaxed border-l-4 border-blue-500 pl-4">
+            Ứng viên Quản trị viên Tập sự Chuỗi cung ứng &amp; Vận hành theo đuổi chương trình Song ngành Kinh doanh Quốc tế và Logistics tại UEH, kết hợp tư duy tối ưu hóa hệ thống bằng dữ liệu, bản lĩnh điều phối hiện trường thực chiến và kỷ lục hơn 15 giải thưởng học thuật, khởi nghiệp cấp Quốc gia &amp; Khu vực.
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="switchTab('cases')" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl transition shadow-lg shadow-blue-600/25">
+              Khám phá 14 Case Studies &rarr;
+            </button>
+            <button onclick="switchTab('ventures')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-semibold rounded-xl border border-slate-700 transition">
+              Hồ sơ Khởi nghiệp Thực chiến
+            </button>
+          </div>
+        </div>
       </div>
-      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
-        Tối ưu vận hành chuỗi cung ứng bằng <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">công nghệ & đổi mới</span>.
-      </h1>
-      <p class="text-base md:text-lg text-slate-400 max-w-2xl leading-relaxed">
-        Xin chào! Tôi là Thế Tài, sinh viên chuyên ngành Kinh doanh quốc tế & Quản lý chuỗi cung ứng tại TP. Hồ Chí Minh. Tôi đam mê giải quyết các bài toán vận hành logistics thực địa và kiến tạo các giải pháp khởi nghiệp công nghệ.
-      </p>
-      <div class="flex flex-wrap items-center gap-4 pt-2">
-        <a href="#projects" class="px-6 py-3 text-sm font-semibold text-white bg-slate-900 border border-slate-700 hover:border-slate-500 rounded-lg transition">
-          Xem các dự án &rarr;
-        </a>
-        <a href="mailto:contact@duongthetai.site" class="px-6 py-3 text-sm font-semibold text-slate-300 hover:text-white transition">
-          Gửi email hợp tác
-        </a>
+
+      <!-- 1.2 Key Performance Indicators -->
+      <div class="space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.2 &mdash; Key Performance Indicators (KPIs)</h2>
+          <span class="text-xs font-mono text-slate-500">VERIFIED METRICS</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-blue-500/50 transition flex flex-col justify-between">
+            <div>
+              <span class="text-4xl md:text-5xl font-black text-white font-mono">15+</span>
+              <h3 class="text-lg font-bold text-blue-400 mt-2">Academic Achievements</h3>
+              <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+                An impressive record with over 15 major championships, high honors, and exemplary research awards in the fields of business, entrepreneurship, and logistics nationwide. I believe 2025 is a landmark year for my achievements, as winning 10 awards in one year across two semesters at UEH University truly requires overcoming many obstacles.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs font-mono text-emerald-400">10 Awards Won in 2025 Alone</div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 transition flex flex-col justify-between">
+            <div>
+              <span class="text-4xl md:text-5xl font-black text-white font-mono">02</span>
+              <h3 class="text-lg font-bold text-cyan-400 mt-2">Top-Tier Degrees</h3>
+              <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+                Simultaneously commanding a high-performance Dual Major at the University of Economics Ho Chi Minh City (UEH): <strong>International Business</strong> &amp; <strong>Logistics and Supply Chain Management</strong>.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs font-mono text-cyan-400">Dual GPA: 3.42 &amp; 3.45 / 4.0</div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 transition flex flex-col justify-between">
+            <div>
+              <span class="text-4xl md:text-5xl font-black text-white font-mono">02</span>
+              <h3 class="text-lg font-bold text-emerald-400 mt-2">Venture Startups</h3>
+              <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+                Proven entrepreneurial execution as Founder &amp; Manager, scaling <strong>Unistay</strong> student housing to a 90% occupancy rate (25% net margin) and <strong>EduTynker</strong> to 10,000+ active community members.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs font-mono text-emerald-400">Founder &amp; Operations Lead</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.3 Selected Portfolio Masterpieces -->
+      <div class="space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.3 &mdash; Selected Portfolio Masterpieces</h2>
+          <span class="text-xs font-mono text-slate-500">HIGHLIGHTED WORKS</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Masterpiece 1 -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between hover:border-amber-500/50 transition">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 text-xs font-mono font-bold bg-amber-950/80 text-amber-400 border border-amber-800/60 rounded">[CASE 01]</span>
+                <span class="text-xs font-mono text-slate-400">SEA Finalist</span>
+              </div>
+              <h3 class="text-lg font-bold text-white leading-snug">Global Product Marketing &amp; Game Optimization Strategy</h3>
+              <p class="text-xs font-mono text-amber-400">Project Identity: Project AETERNA</p>
+              <div class="space-y-2 text-sm text-slate-300">
+                <p><strong class="text-white">Core Impact:</strong> Preserving the cultural identity, history, and heritage of 11 Southeast Asian countries by finding the intersection between RPG and MMORPG mechanics.</p>
+                <p><strong class="text-white">Strategic Execution:</strong> Integrating and visualizing tangible and intangible heritage and historical heroes into project objects.</p>
+              </div>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-800">
+              <a href="#cases" onclick="switchTab('cases')" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold transition">
+                <span>Live Experience &rarr; Brand Story</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Masterpiece 2 -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between hover:border-blue-500/50 transition">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 text-xs font-mono font-bold bg-blue-950/80 text-blue-400 border border-blue-800/60 rounded">[CASE 02]</span>
+                <span class="text-xs font-mono text-slate-400">2nd Runner-Up / 100+ Teams</span>
+              </div>
+              <h3 class="text-lg font-bold text-white leading-snug">Automated Container Defect Inspection Simulation</h3>
+              <p class="text-xs font-mono text-blue-400">Project Identity: "Cont-Tect" &mdash; Team Motion Masters</p>
+              <div class="space-y-2 text-sm text-slate-300">
+                <p><strong class="text-white">Core Impact:</strong> Slashing average container scanning and validation times from 25 minutes down to 5 minutes per container compared to traditional manual checks.</p>
+                <p><strong class="text-white">Strategic Execution:</strong> Formulated an automated inspection solution under a high-pressure 24-hour hackathon to optimize port terminal workflows, outperforming 100+ regional teams.</p>
+              </div>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-800">
+              <button onclick="openModal('case-3')" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/30 text-xs font-semibold transition">
+                <span>Live Experience &rarr; Simulation Case</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Masterpiece 3 -->
+          <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-1 text-xs font-mono font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 rounded">[CASE 03]</span>
+                <span class="text-xs font-mono text-slate-400">Champion Startup Zone</span>
+              </div>
+              <h3 class="text-lg font-bold text-white leading-snug">End-to-End Scalable Supply Chain Model</h3>
+              <p class="text-xs font-mono text-emerald-400">Project Identity: Mealnimals / GroWarriors</p>
+              <div class="space-y-2 text-sm text-slate-300">
+                <p><strong class="text-white">Core Impact:</strong> Formulated an end-to-end business and scalable logistics model, onboarding 500+ active users in month 1 and restructuring workflows to project a 20% net profit margin.</p>
+                <p><strong class="text-white">Strategy Implementation:</strong> Built an intermediary platform connecting merchants with users, evolving from a traditional grocery shopping and food distribution model.</p>
+              </div>
+            </div>
+            <div class="pt-6 mt-6 border-t border-slate-800">
+              <button onclick="openModal('case-1')" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold transition">
+                <span>Live Experience &rarr; P&amp;L &amp; Case Study</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.4 Skills, Tools & Global Credentials -->
+      <div class="space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.4 &mdash; Skills, Tools &amp; Global Credentials</h2>
+          <span class="text-xs font-mono text-slate-500">CAPABILITY MATRIX</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <div class="text-blue-400 text-sm font-mono font-bold"><i class="fa-solid fa-microchip mr-2"></i>Technical &amp; Soft Skills</div>
+            <div class="flex flex-wrap gap-2 pt-1">
+              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Data Analytics (Power BI, SQL, Tableau)</span>
+              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Gemini AI</span>
+              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Incoterms</span>
+              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Cross-Functional Leadership</span>
+              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">High-Stake Negotiation</span>
+              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Conflict Resolution</span>
+              <span class="px-3 py-1 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200">Public Speaking &amp; Pitching</span>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <div class="text-emerald-400 text-sm font-mono font-bold"><i class="fa-solid fa-language mr-2"></i>Languages</div>
+            <ul class="space-y-2 text-sm text-slate-300 pt-1">
+              <li class="flex justify-between items-center py-1 border-b border-slate-800/60"><span>Vietnamese</span><span class="font-mono text-xs text-emerald-400">Native</span></li>
+              <li class="flex justify-between items-center py-1 border-b border-slate-800/60"><span>English</span><span class="font-mono text-xs text-blue-400">IELTS C1</span></li>
+              <li class="flex justify-between items-center py-1"><span>Chinese</span><span class="font-mono text-xs text-amber-400">HSK 2</span></li>
+            </ul>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-3">
+            <div class="text-purple-400 text-sm font-mono font-bold"><i class="fa-solid fa-certificate mr-2"></i>Certifications</div>
+            <ul class="space-y-3 text-sm text-slate-300 pt-1">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check-circle text-purple-400 mt-1"></i>
+                <span><strong>Logistics Operations Specialist</strong> (Tan Minh Tri Academy — TMT OPS &amp; DOCS)</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check-circle text-purple-400 mt-1"></i>
+                <span><strong>MOS Certification</strong> (Microsoft Office Specialist: Word, Excel, PowerPoint)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1.5 Contact Information -->
+      <div class="space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h2 class="text-xs font-mono uppercase tracking-widest text-blue-400">1.5 &mdash; Contact &amp; Digital Presence</h2>
+          <span class="text-xs font-mono text-slate-500">DIRECT CHANNELS</span>
+        </div>
+        <div class="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div class="space-y-3 text-sm">
+            <p class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-location-dot text-blue-400 w-5"></i> <span><strong>Address:</strong> 473 Hoa Hao St, Dien Hong Ward, Ho Chi Minh City</span></p>
+            <p class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-phone text-emerald-400 w-5"></i> <span><strong>Phone:</strong> <a href="tel:0347347538" class="hover:text-white underline">0347347538</a></span></p>
+            <p class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-envelope text-amber-400 w-5"></i> <span><strong>Email:</strong> <a href="mailto:duongthetai2013@gmail.com" class="hover:text-white underline">duongthetai2013@gmail.com</a></span></p>
+          </div>
+          <div class="flex flex-wrap gap-3 md:justify-end">
+            <a href="https://www.linkedin.com/in/taiduong2005" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-blue-950 border border-slate-800 hover:border-blue-500 text-xs font-semibold flex items-center gap-2 transition">
+              <i class="fa-brands fa-linkedin text-blue-400 text-base"></i> LinkedIn
+            </a>
+            <a href="https://www.facebook.com/duongthetai2k5" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-blue-950 border border-slate-800 hover:border-blue-500 text-xs font-semibold flex items-center gap-2 transition">
+              <i class="fa-brands fa-facebook text-blue-500 text-base"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/duongthetai2k5/" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-pink-950 border border-slate-800 hover:border-pink-500 text-xs font-semibold flex items-center gap-2 transition">
+              <i class="fa-brands fa-instagram text-pink-400 text-base"></i> Instagram
+            </a>
+            <a href="https://www.tiktok.com/@tai.bao.ban" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-500 text-xs font-semibold flex items-center gap-2 transition">
+              <i class="fa-brands fa-tiktok text-white text-base"></i> TikTok
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Key Projects Section -->
-    <section id="projects" class="space-y-8">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Dự án & Sáng kiến</h2>
-        <p class="text-slate-400 text-sm mt-1">Các dự án khởi nghiệp, giải pháp công nghệ và đề án dự thi nổi bật.</p>
+    <!-- ==========================================
+         SECTION 2: ACADEMICS (THÀNH TÍCH HỌC TẬP)
+    =========================================== -->
+    <section id="sec-academics" class="tab-content space-y-16">
+      <div class="border-b border-slate-800 pb-6">
+        <span class="text-xs font-mono uppercase tracking-widest text-blue-400">SECTION 02 // ACADEMIC EXCELLENCE</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white mt-2">ACADEMICS &amp; SCIENTIFIC RESEARCH</h2>
       </div>
 
+      <!-- 2.1 University Overview -->
+      <div class="p-6 md:p-8 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="text-xl font-bold text-white">2.1 &mdash; University Overview: University of Economics Ho Chi Minh City (UEH)</h3>
+          <div class="flex gap-2 text-xs font-mono">
+            <span class="px-2.5 py-1 rounded bg-blue-950 text-blue-400 border border-blue-800">Top 301+ QS Asia</span>
+            <span class="px-2.5 py-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Top 501–600 THE World</span>
+          </div>
+        </div>
+        <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+          The University of Economics Ho Chi Minh City (UEH) is one of the key national universities, with nearly 50 years of development, a high-quality faculty, and a wide-ranging international cooperation network with over 125 partners worldwide. UEH has trained hundreds of thousands of bachelors, masters, and doctoral graduates, contributing high-quality human resources to both the public and private sectors in Vietnam. In October 2023, UEH officially transformed into a multi-disciplinary, multi-field university model with four member schools and the UEH Mekong branch. The university has been awarded many prestigious honors, such as the title of Hero of Labor and the First-Class Independence Medal. On international rankings, UEH is among the Top 301+ best universities in Asia according to QS Asia and Top 501–600 universities worldwide according to Times Higher Education in 2025–2026.
+        </p>
+      </div>
+
+      <!-- 2.2 Dual-Major Cumulative GPA -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Project 1 -->
-        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-blue-950/40 border border-slate-800 flex items-center justify-between">
           <div>
-            <div class="flex items-center justify-between text-xs text-blue-400 font-semibold mb-3">
-              <span>AGROBRICK</span>
-              <span class="px-2 py-0.5 rounded bg-blue-950/80 border border-blue-800">Top 100 Startup Wheel 2026</span>
-            </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition mb-2">Vật liệu xây dựng bền vững từ nông nghiệp</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-              Dự án khởi nghiệp tái chế phụ phẩm nông nghiệp thành gạch sinh thái, hướng đến kinh tế tuần hoàn và giảm phát thải carbon trong xây dựng.
-            </p>
+            <span class="text-xs font-mono text-blue-400 uppercase">Major 01 &bull; UEH School of Business</span>
+            <h4 class="text-xl font-bold text-white mt-1">International Business</h4>
+            <p class="text-xs text-slate-400 mt-1">Global Trade, Cross-Border Strategy &amp; Supply Chain</p>
           </div>
-          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Sustainability</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Circular Economy</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Business Model</span>
+          <div class="text-right">
+            <span class="text-3xl font-black font-mono text-white">3.42</span>
+            <span class="block text-xs font-mono text-slate-400">/ 4.0 GPA</span>
           </div>
         </div>
-
-        <!-- Project 2 -->
-        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
+        <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-emerald-950/40 border border-slate-800 flex items-center justify-between">
           <div>
-            <div class="flex items-center justify-between text-xs text-emerald-400 font-semibold mb-3">
-              <span>Cont-tect (Team MOTION MASTERS)</span>
-              <span class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800">Finalist Digiport Hackathon</span>
-            </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition mb-2">Hệ thống phát hiện lỗi container tự động</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-              Đề xuất ứng dụng AI phát hiện hỏng hóc vỏ container tại cảng biển, rút ngắn thời gian kiểm đếm và tối ưu an toàn vận tải hàng hải.
-            </p>
+            <span class="text-xs font-mono text-emerald-400 uppercase">Major 02 &bull; UEH School of Business</span>
+            <h4 class="text-xl font-bold text-white mt-1">Logistics &amp; Supply Chain Management</h4>
+            <p class="text-xs text-slate-400 mt-1">Operations, Procurement, Port &amp; Cold-Chain Systems</p>
           </div>
-          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">AI Vision</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Port Logistics</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Automation</span>
+          <div class="text-right">
+            <span class="text-3xl font-black font-mono text-white">3.45</span>
+            <span class="block text-xs font-mono text-slate-400">/ 4.0 GPA</span>
           </div>
         </div>
+      </div>
 
-        <!-- Project 3 -->
-        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
-          <div>
-            <div class="flex items-center justify-between text-xs text-purple-400 font-semibold mb-3">
-              <span>VILAW LEGISAI</span>
-              <span class="px-2 py-0.5 rounded bg-purple-950/80 border border-purple-800">UII Sandbox Incubated</span>
+      <!-- 2.3 High-Performance Core Courses -->
+      <div class="space-y-6">
+        <h3 class="text-xl font-bold text-white">2.3 &mdash; High-Performance Core Courses</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-mono text-blue-400">CORE MODULE 01</span>
+                <span class="px-2 py-0.5 text-xs font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 rounded">Grade: 4.0 / 4.0</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Enterprise Resource Planning (ERP)</h4>
+              <p class="text-xs text-blue-300 font-medium">Focus: Mastering Odoo system for Operations &amp; Logistics management.</p>
+              <p class="text-sm text-slate-400 leading-relaxed">
+                <strong>Execution:</strong> Applied Odoo modules to streamline company-wide workflows, ensure data integrity and real-time tracking of supply chain activities.
+              </p>
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition mb-2">Trợ lý AI tra cứu & hỗ trợ pháp lý</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-              Nền tảng LegalTech áp dụng AI giúp doanh nghiệp vừa và nhỏ dễ dàng rà soát hợp đồng và tra cứu văn bản quy phạm pháp luật nhanh chóng.
-            </p>
+            <div class="pt-3 border-t border-slate-800">
+              <a href="ERP - G3 - CTWINDOW + ODOO.mp4" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-blue-400 hover:text-blue-300">
+                <i class="fa-solid fa-circle-play"></i> ERP - G3 - CTWINDOW + ODOO.mp4
+              </a>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">LegalTech</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">GenAI</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Startup</span>
+
+          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-mono text-purple-400">CORE MODULE 02</span>
+                <span class="px-2 py-0.5 text-xs font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 rounded">Grade: 4.0 / 4.0</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">International Business Project</h4>
+              <p class="text-xs text-purple-300 font-medium">Focus: "Eggshell-based Exfoliating Gel/Cream".</p>
+              <p class="text-sm text-slate-400 leading-relaxed">
+                <strong>Execution:</strong> Developed a comprehensive international market entry strategy for a sustainable skincare product, from R&amp;D conceptualization to global supply chain mapping.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-800">
+              <a href="PUREVIA - IBP FINAL PRJ.pdf" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-purple-400 hover:text-purple-300">
+                <i class="fa-solid fa-file-pdf"></i> PUREVIA - IBP FINAL PRJ.pdf
+              </a>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-mono text-amber-400">CORE MODULE 03</span>
+                <span class="px-2 py-0.5 text-xs font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 rounded">Grade: 4.0 / 4.0</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Business Simulation</h4>
+              <p class="text-xs text-amber-300 font-medium">Focus: Leverage the Globus system to make important business decisions.</p>
+              <p class="text-sm text-slate-400 leading-relaxed">
+                <strong>Execution:</strong> Acted as a C-level executive to operate a virtual global corporation. Applied core business intelligence and logistics strategies to compete in a simulated market, optimizing production, pricing, and distribution to maximize market share.
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-800 text-xs font-mono text-slate-500">
+              <i class="fa-solid fa-globe mr-1"></i> Globus Executive Simulation
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- Project 4 -->
-        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
-          <div>
-            <div class="flex items-center justify-between text-xs text-amber-400 font-semibold mb-3">
-              <span>AETERNA</span>
-              <span class="px-2 py-0.5 rounded bg-amber-950/80 border border-amber-800">APRU APAC Hackathon 2026</span>
+      <!-- 2.4 Scientific Research -->
+      <div class="space-y-6">
+        <h3 class="text-xl font-bold text-white">2.4 &mdash; Scientific Research Publications &amp; Awards</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Research 1 -->
+          <div class="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800">Giải Đạt NCKH cấp Trường Kinh doanh (COBRP 2025)</span>
             </div>
-            <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition mb-2">Giải pháp dữ liệu chính sách khu vực</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-4">
-              Mô hình phân tích dữ liệu phục vụ hoạch định chính sách công và thích ứng số trong khu vực châu Á - Thái Bình Dương.
+            <h4 class="text-xl font-bold text-white">1. Logistics Xanh Chặng Cuối &amp; Kỷ Nguyên Logistics 5.0</h4>
+            <p class="text-xs font-mono text-slate-400 italic">
+              "Exploring Customer Reactions to Green Alternatives in Last-Mile Logistics: The Impact of Shifting to Electric Vans Integrated with Sustainable Practices and Logistics Marketing."
             </p>
+            <div class="space-y-3 text-sm text-slate-300 pt-2">
+              <div>
+                <strong class="text-blue-400 block mb-1">Phương pháp luận:</strong>
+                <ul class="list-disc list-inside space-y-1 text-slate-400">
+                  <li>Ứng dụng mô hình S-O-R (Stimulus-Organism-Response) làm khung lý thuyết chủ đạo.</li>
+                  <li>Tích hợp mô hình SERVQUAL và lý thuyết Triple Bottom Line (TBL) để xác định các yếu tố quyết định chất lượng dịch vụ chặng cuối.</li>
+                  <li>Xử lý dữ liệu thực nghiệm từ 472 phản hồi thông qua mô hình cấu trúc tuyến tính SEM (PLS-SEM) trên phần mềm SmartPLS 4.0 và SPSS.</li>
+                </ul>
+              </div>
+              <div>
+                <strong class="text-emerald-400 block mb-1">Phát hiện cốt lõi:</strong>
+                <ul class="list-disc list-inside space-y-1 text-slate-400">
+                  <li>Chứng minh yếu tố Sự đảm bảo (Assurance) có ảnh hưởng mạnh nhất đến niềm tin của khách hàng đối với các giải pháp vận tải xanh (EcoVan).</li>
+                  <li>Xác lập mối liên hệ giữa các giá trị bền vững và tính tương tác trong truyền thông tiếp thị Logistics đến hành vi tiêu dùng hiện đại.</li>
+                </ul>
+              </div>
+              <p class="pt-2 border-t border-slate-800 text-slate-300">
+                <strong class="text-white">Đóng góp thực tiễn:</strong> Cung cấp bộ khung dữ liệu cho các doanh nghiệp tối ưu hóa lộ trình chuyển đổi xe tải điện (VinFast EcoVan) nhằm gia tăng lợi thế cạnh tranh và thực hiện cam kết Net-Zero.
+              </p>
+            </div>
           </div>
-          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Data Analytics</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Public Policy</span>
-            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Regional</span>
+
+          <!-- Research 2 -->
+          <div class="p-6 md:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-amber-950 text-amber-400 border border-amber-800">Giải Nhất NCKH cấp Trường Kinh doanh (COBRP 2025)</span>
+            </div>
+            <h4 class="text-xl font-bold text-white">2. Tâm Lý Hành Vi Gen Z &amp; Thị Trường Hàng Giả Cao Cấp</h4>
+            <p class="text-xs font-mono text-slate-400 italic">
+              "The Double-Edged Appeal: Exploring the Factors Influencing Gen Z's Counterfeit Purchases from a Cost-Benefit Perspective and How They Rationalize Their Behavior."
+            </p>
+            <div class="space-y-3 text-sm text-slate-300 pt-2">
+              <div>
+                <strong class="text-blue-400 block mb-1">Phương pháp luận:</strong>
+                <ul class="list-disc list-inside space-y-1 text-slate-400">
+                  <li>Xây dựng mô hình tích hợp dựa trên lý thuyết Phân tích Chi phí - Lợi ích (CBA) và Giá trị cảm nhận (Perceived Value Theory).</li>
+                  <li>Sử dụng thuyết Ngắt kết nối Đạo đức (Moral Disengagement Theory) để giải mã cơ chế tự hợp lý hóa hành vi tiêu dùng không chính thống.</li>
+                  <li>Thực hiện khảo sát định lượng và kiểm định giả thuyết bằng PLS-SEM trên mẫu 290 người tiêu dùng Gen Z tại TP.HCM.</li>
+                </ul>
+              </div>
+              <div>
+                <strong class="text-amber-400 block mb-1">Phát hiện cốt lõi:</strong>
+                <ul class="list-disc list-inside space-y-1 text-slate-400">
+                  <li>Giải mã sự xung đột giữa Động lực sính diện (Vanity Motivation) và Sự bất hòa nhận thức (Cognitive Dissonance) trong tâm trí Gen Z.</li>
+                  <li>Phát hiện vai trò của Ngắt kết nối Đạo đức như một "chiếc van tâm lý" giúp người tiêu dùng giảm bớt mặc cảm tội lỗi khi mua hàng giả cao cấp.</li>
+                </ul>
+              </div>
+              <p class="pt-2 border-t border-slate-800 text-slate-300">
+                <strong class="text-white">Đóng góp thực tiễn:</strong> Đề xuất các chiến lược giáo dục thương hiệu và tiếp thị đạo đức, giúp các nhãn hàng cao cấp bảo vệ quyền sở hữu trí tuệ và định hướng lại giá trị tiêu dùng cho thế hệ mới.
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Experience Timeline -->
-    <section id="experience" class="space-y-8">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Kinh nghiệm & Chuyên môn</h2>
-        <p class="text-slate-400 text-sm mt-1">Quá trình thực chiến tại hiện trường logistics và các chứng chỉ chuyên ngành.</p>
+    <!-- ==========================================
+         SECTION 3: CASES (14 HỒ SƠ DỰ ÁN & GIẢI THƯỞNG)
+    =========================================== -->
+    <section id="sec-cases" class="tab-content space-y-10">
+      <div class="border-b border-slate-800 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-blue-400">SECTION 03 // COMPETITION &amp; PROJECT ARCHIVE</span>
+          <h2 class="text-3xl md:text-5xl font-black text-white mt-2">14 SELECTED CASE STUDIES</h2>
+        </div>
+        <p class="text-sm text-slate-400 max-w-md">Nhấp vào từng dự án để mở trình đọc toàn văn (Tổng quan, Hành trình, Vai trò, Đóng góp kỹ thuật, Kết quả &amp; Bài học tâm đắc).</p>
       </div>
 
-      <div class="space-y-6 border-l-2 border-slate-800 ml-3 pl-6">
-        <div class="relative">
-          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-slate-950"></span>
-          <span class="text-xs text-blue-400 font-mono">Operations Experience</span>
-          <h3 class="text-lg font-bold text-white mt-1">Air Export Field Operations Intern &bull; ITL Freight Management</h3>
-          <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-            Phụ trách trực tiếp quy trình kiểm hóa, giao nhận hàng không xuất khẩu tại hiện trường; phối hợp với hải quan sân bay và hãng hàng không để đảm bảo tiến độ chuyến bay.
-          </p>
-        </div>
+      <div id="cases-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
 
-        <div class="relative">
-          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-slate-700 ring-4 ring-slate-950"></span>
-          <span class="text-xs text-slate-400 font-mono">Professional Training</span>
-          <h3 class="text-lg font-bold text-white mt-1">Nghiệp vụ Hiện trường (OPS) & Chứng từ Xuất nhập khẩu (DOCS)</h3>
-          <p class="text-slate-400 text-sm mt-2 leading-relaxed">
-            Hoàn thành các khóa đào tạo thực hành chuyên sâu TMT OPS 5 và TMT DOCS 6 tại Tân Minh Trí, làm chủ quy trình phát hành Bill of Lading, AWB, khai báo hải quan điện tử và điều phối vận tải.
-          </p>
+    <!-- ==========================================
+         SECTION 4: VENTURES (KHỞI NGHIỆP & LÃNH ĐẠO)
+    =========================================== -->
+    <section id="sec-ventures" class="tab-content space-y-16">
+      <div class="border-b border-slate-800 pb-6">
+        <span class="text-xs font-mono uppercase tracking-widest text-emerald-400">SECTION 04 // REAL-WORLD EXECUTION</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white mt-2">CORE VENTURES &amp; LEADERSHIP LOGS</h2>
+      </div>
+
+      <!-- Part 1: Core Ventures -->
+      <div class="space-y-6">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-bold text-white">1. Dự Án Khởi Nghiệp &amp; Điều Phối Hiện Trường (Core Ventures)</h3>
+          <span class="text-xs font-mono text-emerald-400">03 VENTURES</span>
         </div>
+        <div id="ventures-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- Part 2: Leadership Logs -->
+      <div class="space-y-6">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-bold text-white">2. Điều Phối &amp; Lãnh Đạo Đội Nhóm Ngoại Khóa (Leadership Logs)</h3>
+          <span class="text-xs font-mono text-blue-400">06 LOGS</span>
+        </div>
+        <div id="logs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="p-8 md:p-12 bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-3xl text-center space-y-6">
-      <h2 class="text-3xl font-extrabold text-white tracking-tight">Sẵn sàng mở rộng mạng lưới</h2>
-      <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-        Tôi luôn hoan nghênh những cơ hội giao lưu học hỏi, thảo luận về các dự án chuỗi cung ứng, logistics hiện trường hoặc sáng kiến khởi nghiệp công nghệ.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4 pt-2">
-        <a href="mailto:contact@duongthetai.site" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-xl transition shadow-lg shadow-blue-600/25">
-          <i class="fa-regular fa-envelope"></i> Gửi tin nhắn qua Email
-        </a>
+    <!-- ==========================================
+         SECTION 5: JOURNAL (BÀI VIẾT & GÓC NHÌN)
+    =========================================== -->
+    <section id="sec-journal" class="tab-content space-y-10">
+      <div class="border-b border-slate-800 pb-6">
+        <span class="text-xs font-mono uppercase tracking-widest text-amber-400">SECTION 05 //LONG-FORM ESSAYS &amp;MONOGRAPHS</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white mt-2">OPERATIONS &amp; STRATEGY JOURNAL</h2>
+        <p class="text-sm text-slate-400 mt-2">Nơi lưu trữ các bài phân tích chuyên sâu về Vận hành thực chiến, Quản trị chuỗi cung ứng, Nghệ thuật dụng nhân và Chiến lược hạ tầng Logistics quốc gia.</p>
       </div>
+
+      <div id="journal-list" class="space-y-6"></div>
     </section>
+
   </main>
 
-  <footer class="border-t border-slate-900 py-8 text-center text-xs text-slate-500">
-    <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p>&copy; 2026 Dương Thế Tài. Hosted on GitHub Pages & Powered by Vibe Coding.</p>
-      <p class="font-mono text-slate-600">domain: www.duongthetai.site</p>
+  <!-- EDITORIAL FULL-TEXT MODAL READER -->
+  <div id="reader-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md overflow-y-auto p-4 md:p-10">
+    <div class="max-w-4xl mx-auto bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-6">
+      <div class="sticky top-0 z-10 bg-slate-900/95 backdrop-blur border-b border-slate-800 px-6 py-4 flex items-center justify-between">
+        <span id="modal-badge" class="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-blue-950 text-blue-400 border border-blue-800">CASE ARCHIVE</span>
+        <button onclick="closeModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-red-600/80 text-slate-300 hover:text-white text-xs font-mono transition">
+          <i class="fa-solid fa-xmark mr-1"></i> Đóng (ESC)
+        </button>
+      </div>
+      <div id="modal-body" class="p-6 md:p-10 space-y-6 text-slate-200 leading-relaxed"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-900 py-10 mt-20 text-center text-xs text-slate-500">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p>&copy; 2026 Dương Thế Tài (2005). All Rights Reserved.</p>
+      <p class="font-mono text-slate-400">www.duongthetai.site &bull; Supply Chain &amp; Operations Portfolio</p>
     </div>
   </footer>
-</body>
-</html>
+
+  <!-- DATA & INTERACTIVITY SCRIPT -->
+  <script>
+    const ARCHIVE_DATA = {
+      "case-1": {
+        badge: "3.1 — QUÁN QUÂN STARTUP ZONE 2025",
+        title: "🏆 MEALNIMALS – TỪ BÀI TOÁN LÃNG PHÍ THỰC PHẨM ĐẾN MỘT NỀN TẢNG TẠO GIÁ TRỊ BỀN VỮNG",
+        role: "Trưởng nhóm Tài chính & Vận hành (Finance & Operations Lead)",
+        period: "02/2025 – 12/2025 (10 tháng)",
+        summary: "Nền tảng trung gian giải quyết bài toán thực phẩm cận hạn (near-expired food), onboard 500+ người dùng ngay tháng đầu tiên, biên lợi nhuận ròng dự phóng 20% và lọt Top 20 Youth Startup Wheel 2026.",
+        quote: "Sự xuất sắc trong vận hành không nằm ở việc tối ưu một quy trình đơn lẻ, mà nằm ở khả năng xây dựng một hệ sinh thái nơi tất cả các bên cùng tạo ra giá trị cho nhau.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Mealnimals là một nền tảng trung gian kết nối các nhà bán hàng thực phẩm với người tiêu dùng nhằm giải quyết bài toán thực phẩm cận hạn sử dụng (near-expired food) – một trong những nguyên nhân lớn dẫn đến lãng phí thực phẩm trên toàn cầu. Thay vì để các sản phẩm còn giá trị sử dụng bị loại bỏ khỏi chuỗi cung ứng, Mealnimals tạo ra một hệ sinh thái giúp nhà bán hàng tối ưu doanh thu, người tiêu dùng tiếp cận thực phẩm với chi phí hợp lý và xã hội giảm thiểu lượng rác thải thực phẩm phát sinh mỗi ngày.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">🚀 Hành trình 10 tháng xây dựng và phát triển</h4>
+          <p>Từ tháng 02 đến tháng 12 năm 2025, tôi cùng những người bạn là sinh viên xuất sắc của Đại học Kinh tế TP. Hồ Chí Minh (UEH) đã dành gần 10 tháng để nghiên cứu, xây dựng và hoàn thiện mô hình kinh doanh cho Mealnimals. Đội ngũ liên tục kiểm chứng giả định thị trường, thiết kế mô hình vận hành, tối ưu tài chính và giải quyết những thách thức về cung – cầu của nền tảng đa bên (multi-sided platform). Những nỗ lực đó đã giúp dự án nhận được lời mời đầu tư chính thức từ các quỹ đầu tư mạo hiểm trong giai đoạn đánh giá cuối cùng.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">👨‍💼 Vai trò của tôi: Trưởng nhóm Tài chính & Vận hành</h4>
+          <p>Đảm nhiệm vị trí Finance & Operations Lead, điều phối các hoạt động cốt lõi giữa Marketing, Công nghệ và Tài chính. Tập trung thiết kế các quy trình vận hành có khả năng mở rộng và xây dựng chiến lược tài chính tổng thể cho toàn hệ sinh thái.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Xây dựng chiến lược thu mua (Procurement Strategy):</strong> Chủ động làm việc và thương lượng với các nhà bán hàng thực phẩm nhằm thiết lập nguồn cung ổn định, giải quyết "bài toán con gà và quả trứng" của các mô hình marketplace.</li>
+            <li><strong>Thiết kế và tái cấu trúc vận hành (Operations Restructuring):</strong> Xây dựng quy trình onboarding cho nhà bán hàng, thiết kế luồng vận hành và lộ trình giao nhận nhằm tối ưu trải nghiệm và giảm chi phí.</li>
+            <li><strong>Kiểm soát chi phí và xây dựng mô hình tài chính:</strong> Thiết lập khung định giá linh hoạt, mô hình Unit Economics và báo cáo Profit & Loss (P&L) dự phóng.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏆 Quán quân cuộc thi khởi nghiệp Startup Zone 2025.</li>
+            <li>🚀 Onboard thành công hơn 500 người dùng hoạt động ngay trong tháng đầu tiên của giai đoạn vận hành mô phỏng.</li>
+            <li>💰 Xây dựng mô hình tài chính với biên lợi nhuận ròng dự phóng đạt 20%.</li>
+            <li>🌏 Đưa dự án lọt Top 20 Youth Startup Wheel 2026 & nhận lời mời đầu tư từ các quỹ VC.</li>
+          </ul>
+        `
+      },
+      "case-2": {
+        badge: "3.2 — GEN Z TECHNOPRENEURS 2025 (QUÁN QUÂN)",
+        title: "⚖️ VILAW LEGIS AI – KIẾN TẠO TƯƠNG LAI CỦA TUÂN THỦ PHÁP LÝ BẰNG TRÍ TUỆ NHÂN TẠO",
+        role: "CFO, Operations Lead & Main Presenter",
+        period: "10/2025 – 01/2026 (UII Sandbox)",
+        summary: "Trợ lý AI tự động rà soát văn bản, đánh giá rủi ro và kiểm tra mức độ tuân thủ quy định pháp luật cho doanh nghiệp, xuất sắc giành ngôi Quán quân và nhận gói bảo trợ UII Sandbox.",
+        quote: "The future of compliance is not more paperwork. It is smarter systems that help businesses move faster, safer and with greater confidence.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>VILAW LEGIS AI là dự án công nghệ pháp lý (LegalTech) được xây dựng nhằm hỗ trợ doanh nghiệp tối ưu hóa hoạt động tư vấn pháp lý và đẩy nhanh quá trình chuyển đổi số trong công tác quản trị tuân thủ. Hệ thống tự động rà soát văn bản, đánh giá rủi ro và kiểm tra mức độ tuân thủ quy định.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">🚀 Hành trình tăng tốc khởi nghiệp cùng hệ sinh thái UII</h4>
+          <p>Từ tháng 10/2025 đến tháng 01/2026, tham gia chương trình tăng tốc khởi nghiệp chuyên sâu do Viện Đổi mới Sáng tạo UEH (UII) bảo trợ, quy tụ đội ngũ liên ngành từ UEH, ĐH Bách Khoa và ĐH Văn Hiến.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (CFO & Operations Lead)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Xây dựng hệ thống Pitching & Kiểm định sản phẩm:</strong> Dẫn dắt quá trình chuẩn bị và trình bày cột mốc sản phẩm hàng tuần trước hội đồng chuyên gia và đại diện quỹ đầu tư.</li>
+            <li><strong>Thiết lập bản đồ sản phẩm (Product Mapping):</strong> Chuyển hóa các quy định pháp luật doanh nghiệp phức tạp thành cấu trúc logic và bộ tham số đầu vào cho AI.</li>
+            <li><strong>Quản lý tài chính và phân bổ nguồn lực:</strong> Xây dựng kế hoạch ngân sách theo từng giai đoạn phát triển và tối ưu hiệu quả đầu tư trong chương trình tăng tốc.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏆 Quán quân chương trình tăng tốc khởi nghiệp do UII bảo trợ.</li>
+            <li>🚀 Nhận gói hỗ trợ tăng tốc chuyên nghiệp thuộc chương trình Sandbox của UII.</li>
+            <li>📊 Xây dựng thành công nền tảng AI tự động hóa rà soát pháp lý và đánh giá rủi ro tuân thủ.</li>
+          </ul>
+        `
+      },
+      "case-3": {
+        badge: "3.3 — LOGISTICS DIGIPORT 2025 (Á QUÂN 2)",
+        title: "🚢 CONT-TECT – TÁI ĐỊNH NGHĨA QUY TRÌNH KIỂM TRA CONTAINER BẰNG CẢM BIẾN THÔNG MINH",
+        role: "Team Leader (Đội Motion Masters)",
+        period: "24 giờ Hackathon Cường độ cao (2025)",
+        summary: "Hệ sinh thái kiểm tra hư hỏng container tự động tại cổng cảng bằng cụm cảm biến quang học, siêu âm, cảm biến khí và AI, rút ngắn thời gian kiểm tra từ 25 phút xuống còn 5 phút/container.",
+        quote: "Operational excellence is not about moving faster. It is about removing every unnecessary minute from the system.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Cont-Tect là giải pháp mô phỏng hệ sinh thái kiểm tra container tự động hỗ trợ cảng biển và depot logistics phát hiện nhanh hư hỏng cấu trúc container ngay tại cổng kiểm bãi thông qua cụm cảm biến quang học, siêu âm, cảm biến khí cùng AI phân tích dữ liệu tập trung.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚡ 24 giờ Hackathon & Vai trò Team Leader</h4>
+          <p>Điều phối đội ngũ 5 thành viên liên ngành từ UEH và UMT trong 24 giờ liên tục. Quản lý sprint, phân bổ nguồn lực và kết nối giải pháp kỹ thuật với thực tiễn vận hành hàng hải.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Tối ưu hóa quy trình vận hành (Process Optimization):</strong> Phân tích hành trình kiểm tra container tại cổng cảng để triệt tiêu điểm nghẽn tiếp nhận phương tiện.</li>
+            <li><strong>Thiết kế luồng vận hành bến bãi (Terminal Workflow Design):</strong> Tự động quét và kiểm tra tình trạng container ngay khi xe di chuyển qua cổng cảng mà không cần dừng thủ công.</li>
+            <li><strong>Kết nối công nghệ với thực tiễn:</strong> Tích hợp đa cảm biến phát hiện cả hư hỏng hữu hình lẫn tiềm ẩn của vỏ container.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🥈 Đạt giải Á quân 2 Hackathon, vượt qua hơn 100 đội thi trong khu vực.</li>
+            <li>⏱️ Chứng minh khả năng rút ngắn thời gian kiểm tra từ 25 phút xuống còn 5 phút/container.</li>
+          </ul>
+        `
+      },
+      "case-4": {
+        badge: "3.4 — SINH VIÊN KINH DOANH SỐ 2025 VECOM (Á QUÂN 2)",
+        title: "🥗 MEAL-KIT E-COMMERCE PLATFORM – TỐI ƯU CHUỖI CUNG ỨNG LẠNH CHO TMĐT THỰC PHẨM",
+        role: "Finance & Logistics Strategist",
+        period: "11/2025 – 12/2025 (Chung kết toàn quốc tại Hà Nội)",
+        summary: "Thiết kế mô hình tài chính (CapEx/OpEx) và mạng lưới Cold-Chain Logistics cho nền tảng thương mại điện tử phân phối gói nguyên liệu sơ chế sẵn Meal-Kit.",
+        quote: "In fresh-food e-commerce, profitability is important, but preserving quality throughout the supply chain is what truly creates customer trust.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Phát triển trong khuôn khổ cuộc thi cấp quốc gia do Hiệp hội Thương mại Điện tử Việt Nam (VECOM) tổ chức, xây dựng nền tảng TMĐT phân phối gói nguyên liệu sơ chế sẵn (Meal-Kit) với trọng tâm là quản trị chuỗi cung ứng lạnh (Cold Chain).</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Finance & Logistics Strategist)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Mô hình hóa tài chính (Financial Modeling):</strong> Xây dựng cấu trúc CapEx và OpEx cho hệ thống trung tâm phân loại và xử lý đơn hàng đa vùng, tính toán thời gian hoàn vốn.</li>
+            <li><strong>Thiết kế mạng lưới logistics chuỗi lạnh (Cold-Chain Logistics Design):</strong> Giảm thiểu rủi ro đứt gãy chuỗi lạnh từ kho vận đến tay người tiêu dùng.</li>
+            <li><strong>Định tuyến hoàn tất đơn hàng (Fulfillment Routing):</strong> Tối ưu phân phối chặng cuối tại đô thị, hạn chế biến động nhiệt độ.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🥈 Giải Á quân 2 (Hạng mục 3) cuộc thi cấp quốc gia VECOM 2025.</li>
+            <li>🏅 Giải Khuyến khích toàn quốc tại đêm Chung kết ở Hà Nội.</li>
+          </ul>
+        `
+      },
+      "case-5": {
+        badge: "3.5 — MANAGEMENT TRAINEE CHALLENGE 2025 (Á QUÂN 2)",
+        title: "🏢 MANAGEMENT TRAINEE CHALLENGE – MÔ PHỎNG TÁI CẤU TRÚC DOANH NGHIỆP DƯỚI ÁP LỰC",
+        role: "Team Lead & CFO",
+        period: "11/2025 – 12/2025",
+        summary: "Dẫn dắt các đội thi liên trường UEH – FTU2 giải quyết chuỗi tình huống khủng hoảng vận hành, nhân sự và tài chính, đưa 100% đội nhóm phụ trách lọt vào Top 3 ở tất cả các chặng.",
+        quote: "Numbers tell us what is happening. Leadership turns those numbers into actions that drive results.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Chương trình mô phỏng quy trình tuyển chọn Management Trainee và Assessment Center của các tập đoàn đa quốc gia do Đại học Mở TP.HCM (OU) tổ chức, dưới sự cố vấn từ chị Hương (Phó Chủ tịch BNA) và anh Henry Tâm Phan.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Team Lead & CFO)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Lãnh đạo giải quyết bài toán đa chức năng:</strong> Xử lý các tình huống logistics, vận hành, phân phối thương mại, tái cấu trúc tổ chức và nhân sự dưới góc nhìn tổng thể doanh nghiệp.</li>
+            <li><strong>Quản trị tài chính dưới áp lực thời gian:</strong> Xây dựng mô hình phân tích chi phí – lợi ích (CBA) và phân bổ nguồn lực chỉ trong vài giờ đồng hồ.</li>
+            <li><strong>Điều phối đội ngũ liên trường UEH – FTU2:</strong> Chuẩn hóa dữ liệu và bảo vệ đề xuất trước hội đồng giám khảo.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🥈 Đạt giải Á quân 2 chung cuộc của chương trình.</li>
+            <li>🏆 Đưa toàn bộ các đội nhóm do mình dẫn dắt lọt vào Top 3 ở tất cả các chặng giải case xuyên suốt cuộc thi.</li>
+          </ul>
+        `
+      },
+      "case-6": {
+        badge: "3.6 — QUÁN QUÂN COOP CHALLENGE 2025",
+        title: "🌱 OVINA – HIỆN ĐẠI HÓA HỢP TÁC XÃ NÔNG NGHIỆP THEO MÔ HÌNH FARM-TO-TABLE",
+        role: "Team Leader (Quản lý 10 thành viên)",
+        period: "2025 (Chi cục Phát triển Nông thôn TP.HCM)",
+        summary: "Tái định hình hợp tác xã nông nghiệp theo chuỗi giá trị farm-to-table khép kín và kinh tế tuần hoàn với sản phẩm kem/gel tẩy tế bào chết từ vỏ trứng tái chế kết hợp nha đam và dầu dừa.",
+        quote: "A stronger supply chain does more than move products. It creates opportunities, empowers producers and builds sustainable communities.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>OVINA được phát triển trong chương trình do Chi cục Phát triển Nông thôn TP.HCM tổ chức, hướng tới thiết lập chuỗi giá trị minh bạch kết nối trực tiếp nông dân với thị trường tiêu dùng đô thị và gia tăng giá trị cho phụ phẩm nông nghiệp.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Team Leader - 10 thành viên)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Phân bổ nguồn lực & điều phối đội ngũ 10 thành viên:</strong> Chia thành các tiểu ban chuyên trách: chuỗi cung ứng nông nghiệp, hoạch định tài chính, R&D sản phẩm và tiếp cận bán lẻ.</li>
+            <li><strong>Quy hoạch logistics nguồn cung:</strong> Đề xuất hệ thống kho trung chuyển địa phương kết nối trực tiếp nông dân, hợp tác xã và đô thị, cắt giảm chi phí trung gian.</li>
+            <li><strong>Xây dựng mô hình kinh doanh bền vững:</strong> Đảm bảo biên lợi nhuận thương mại song hành cùng sinh kế cộng đồng nông민.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏆 Xuất sắc đạt ngôi vị Quán quân Coop Challenge 2025.</li>
+            <li>🌱 Được các cơ quan quản lý nông nghiệp TP.HCM đánh giá cao về tính khả thi thực tiễn.</li>
+          </ul>
+        `
+      },
+      "case-7": {
+        badge: "3.7 — QUÁN QUÂN YOUPRENEUR LAUNCHPAD STARTUP 2025",
+        title: "🧱 AGROBRICK – THƯƠNG MẠI HÓA VẬT LIỆU XÂY DỰNG XANH THEO TƯ DUY KINH TẾ TUẦN HOÀN",
+        role: "Team Leader & Anchor Presenter (Đội Glowgetters)",
+        period: "03/2025 – 04/2025 (FTU2)",
+        summary: "Phát triển vật liệu xây dựng xanh cách âm, cách nhiệt từ phế thải và phụ phẩm công nghiệp; giành ngôi Quán quân tại FTU2 và lọt Top 20 Youth Startup Wheel 2026.",
+        quote: "The future of supply chains is not only about efficiency. It is about transforming waste into value and sustainability into competitive advantage.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Agrobrick tập trung phát triển vật liệu xây dựng thân thiện với môi trường có khả năng cách âm, cách nhiệt từ nguồn phế thải và phụ phẩm công nghiệp theo mô hình kinh tế tuần hoàn.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Team Leader & Anchor Presenter)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Thiết kế mạng lưới thu mua nguyên liệu xanh:</strong> Xây dựng bản đồ nguồn cung đầu vào từ phế thải công nghiệp, tối ưu giá vốn hàng bán (COGS).</li>
+            <li><strong>Xây dựng chiến lược logistics chuỗi cung ứng:</strong> Phân tích điểm tập kết nguyên liệu và khoảng cách vận chuyển để đảm bảo nguồn cung dài hạn.</li>
+            <li><strong>Chủ trì phản biện trước hội đồng chuyên gia:</strong> Bảo vệ thành công cấu trúc chi phí và khả năng mở rộng sản xuất tại vòng Chung kết.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏆 Quán quân cuộc thi khởi nghiệp Youpreneur Launchpad Startup 2025 (FTU2).</li>
+            <li>🚀 Lọt Top 20 Youth Startup Wheel 2026.</li>
+          </ul>
+        `
+      },
+      "case-8": {
+        badge: "3.8 — STARTUP CHALLENGE COMPETITION 2025 (Á QUÂN 2)",
+        title: "🌿 SUSTAINABLE COSMETICS – THƯƠNG MẠI HÓA MỸ PHẨM TUẦN HOÀN TỪ NGUYÊN LIỆU TÁI CHẾ",
+        role: "Operations & Commercialization Lead",
+        period: "2025 (Đại học Tôn Đức Thắng - TDTU)",
+        summary: "Thiết kế hệ thống Reverse Logistics thu gom vỏ trứng từ các chuỗi bánh ngọt và ứng dụng công nghệ nghiền siêu mịn để thương mại hóa dòng mỹ phẩm thiên nhiên tuần hoàn.",
+        quote: "Innovation creates possibilities. Operations transform those possibilities into products that can scale and create impact.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Hợp tác liên trường cùng các nhà nghiên cứu từ ĐH Y khoa Phạm Ngọc Thạch để đưa công nghệ nghiền siêu mịn vỏ trứng kết hợp nha đam và dầu dừa từ phòng thí nghiệm ra thị trường thương mại.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Operations & Commercialization Lead)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Thiết kế hệ thống Reverse Logistics:</strong> Thu gom vỏ trứng từ các chuỗi cửa hàng bánh ngọt và cơ sở thực phẩm làm nguồn nguyên liệu đầu vào ổn định.</li>
+            <li><strong>Thiết kế chuỗi cung ứng sản xuất:</strong> Đánh giá phương án nhà xưởng, gia công và kiểm soát tiêu chuẩn kích thước hạt siêu mịn an toàn trên da.</li>
+            <li><strong>Chiến lược thương mại hóa:</strong> Chuyển đổi các chỉ số kỹ thuật phòng lab thành tiêu chí vận hành và tài chính thương mại.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🥈 Giải Á quân 2 toàn quốc tại Startup Challenge Competition 2025 (TDTU).</li>
+            <li>🌏 Lọt Top 20 Startup Wheel Youth Đông Nam Á.</li>
+          </ul>
+        `
+      },
+      "case-9": {
+        badge: "3.9 — DIGITAL PIONEERS 2025",
+        title: "🚚 DỰ ÁN '5T' – MÔ HÌNH PHÂN PHỐI NÔNG SẢN ĐA KÊNH TỪ NÔNG TRẠI ĐẾN BÀN ĂN",
+        role: "Operations Lead",
+        period: "2025 (CLB GPA)",
+        summary: "Đồng bộ hóa dữ liệu tồn kho thời gian thực với hoạt động digital marketing và tối ưu chuỗi hoàn tất đơn hàng nông sản tươi sống dưới sự cố vấn của PGS. Hoàng Cửu Long & COO Bánh mì Má Hải.",
+        quote: "A supply chain is not judged by how it performs in perfect conditions, but by how resilient it remains when reality becomes unpredictable.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Mô hình phân phối đa kênh dành cho nông sản và thực phẩm tươi sống, cắt giảm các tầng trung gian để bảo toàn độ tươi mới và tối ưu hiệu quả kinh tế từ nông trại đến bàn ăn.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Operations Lead)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Xây dựng mạng lưới cố vấn chuyên môn:</strong> Chủ động kết nối và nhận phản biện từ PGS. Hoàng Cửu Long (Phó Trưởng khoa KDQT-Marketing UEH) và COO thương hiệu Bánh mì Má Hải.</li>
+            <li><strong>Tích hợp vận hành với marketing:</strong> Đồng bộ dữ liệu tồn kho theo thời gian thực với chiến dịch digital marketing để hạn chế hủy đơn do thiếu hàng.</li>
+            <li><strong>Tối ưu hóa chuỗi hoàn tất đơn hàng:</strong> Triệt tiêu điểm nghẽn xử lý đơn hàng thực phẩm tươi sống.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏆 Đạt giải "Đội thi được yêu thích nhất" với chỉ số tương tác và tiếp cận cao nhất chương trình.</li>
+          </ul>
+        `
+      },
+      "case-10": {
+        badge: "3.11 — Ý TƯỞNG KHỞI NGHIỆP HUTECH 2025",
+        title: "🥥 CAMACO – XÂY DỰNG NỀN TẢNG VẬN HÀNH CHO THƯƠNG HIỆU BƠ PHẾT DINH DƯỠNG CAO CẤP",
+        role: "Core Operations Planner",
+        period: "2025 (Đại học HUTECH)",
+        summary: "Thiết lập tiêu chuẩn quản trị tồn kho chống tách lớp tự nhiên và thiết kế quy trình sản xuất batch processing cho dòng bơ phết dừa dẻo, matcha và hạt điều.",
+        quote: "Great products begin with innovation, but sustainable growth depends on the systems that preserve quality at every stage of the journey.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Camaco phát triển dòng bơ phết dinh dưỡng cao cấp kết hợp giữa dừa dẻo, matcha thượng hạng và bơ hạt điều tự nhiên, giải quyết bài toán bảo quản và mở rộng sản xuất thực phẩm lành mạnh.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Core Operations Planner)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Xây dựng tiêu chuẩn quản trị tồn kho:</strong> Thiết lập thông số lưu kho cho sản phẩm có hàm lượng dầu tự nhiên cao nhằm hạn chế tách lớp và biến đổi cấu trúc.</li>
+            <li><strong>Lập bản đồ vòng đời sản phẩm & Batch Processing:</strong> Phân tích mối quan hệ giữa hạn sử dụng, nhiệt độ và thiết kế sơ đồ bố trí sản xuất theo mẻ giúp giảm lãng phí nguyên liệu.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏅 Đạt giải Khuyến khích toàn quốc tại cuộc thi khởi nghiệp HUTECH 2025.</li>
+          </ul>
+        `
+      },
+      "case-11": {
+        badge: "3.12 — HR REGENZ 2024 (QUÁN QUÂN)",
+        title: "🏆 HR REGENZ – TÁI CẤU TRÚC BỘ MÁY STARTUP ĐANG TĂNG TRƯỞNG NÓNG",
+        role: "Team Leader & Crisis Arbitrator",
+        period: "04/2024 (UEH)",
+        summary: "Cuộc thi giải case đầu tiên từ năm nhất đại học: Thiết kế lại kiến trúc tổ chức (Organizational Architecture) và hệ thống KPI để triệt tiêu ma sát nội bộ cho startup tăng trưởng nóng.",
+        quote: "Every high-performing operation begins with a high-performing organization. Fix the friction inside the system before trying to accelerate it.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Giải quyết bài toán tái cấu trúc tổ chức và tối ưu hóa nguồn nhân lực cho startup đang tăng trưởng nhanh gặp khủng hoảng chồng chéo trách nhiệm và đứt gãy thông tin.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Team Leader & Crisis Arbitrator)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Thiết kế lại kiến trúc tổ chức:</strong> Tái cấu trúc luồng báo cáo giữa các phòng ban, tăng tốc độ ra quyết định.</li>
+            <li><strong>Tối ưu hóa hiệu suất nguồn nhân lực:</strong> Xây dựng hệ thống KPI minh bạch liên kết mục tiêu cá nhân với mục tiêu kinh doanh tổng thể.</li>
+            <li><strong>Giải quyết ma sát nội bộ:</strong> Điều phối đội hình sinh viên năm nhất vượt qua nhiều đội thi khóa trên giàu kinh nghiệm.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏆 Xuất sắc giành ngôi vị Quán quân HR Regenz 2024 ngay từ năm nhất.</li>
+          </ul>
+        `
+      },
+      "case-12": {
+        badge: "3.13 — BRAINWAVE 2024 (QUÁN QUÂN HACKATHON 96H)",
+        title: "🌍 SAMSUNG GLOBAL SUPPLY CHAIN RESILIENCE – CHIẾN LƯỢC PHÒNG NGỪA RỦI RO TOÀN CẦU",
+        role: "Risk Architecture Lead (Đội Innovibe)",
+        period: "10/2024 (96 giờ Hackathon)",
+        summary: "Xây dựng ma trận Xác suất – Tác động, thiết kế hành lang cung ứng dự phòng và mô hình kho dự phòng chiến lược (dark-site warehousing) bảo vệ chuỗi cung ứng toàn cầu của Samsung.",
+        quote: "The strongest supply chains are not those that never face disruption, but those designed to survive and recover when disruption inevitably arrives.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Trong 96 giờ Hackathon liên tục do Đoàn khoa Quản trị UEH tổ chức, đội Innovibe xây dựng chiến lược quản trị rủi ro và ứng phó khủng hoảng địa chính trị, đứt gãy logistics cho mạng lưới chuỗi cung ứng công nghệ cao của Samsung.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Risk Architecture Lead)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Mô hình hóa rủi ro chuỗi cung ứng:</strong> Thiết lập ma trận Probability–Impact Matrix lượng hóa rủi ro thiếu hụt linh kiện, gián đoạn vận tải và địa chính trị.</li>
+            <li><strong>Thiết kế hành lang cung ứng dự phòng & Dark-site Warehousing:</strong> Đa dạng hóa nhà cung cấp thay thế và quy hoạch kho dự phòng chiến lược tại các nút giao trọng yếu.</li>
+            <li><strong>Xây dựng kịch bản quản trị khủng hoảng (BCP):</strong> Thiết kế quy trình phản ứng nhanh đảm bảo tính liên tục trong vận hành.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🏆 Quán quân cuộc thi Học thuật Brainwave 2024.</li>
+          </ul>
+        `
+      },
+      "case-13": {
+        badge: "3.14 — [CASE 15] UEH DEBATE CHAMPIONSHIP 2025 (Á QUÂN 2)",
+        title: "🎤 INTERNATIONAL BUSINESS & MARKETING DEBATE DELEGATION – TƯ DUY PHẢN BIỆN THƯƠNG MẠI QUỐC TẾ",
+        role: "Main Constructive Debater",
+        period: "11/2025 (Khoa KDQT - Marketing UEH)",
+        summary: "Xây dựng hệ thống lập luận chiến lược về chủ nghĩa bảo hộ thương mại, chính sách thuế quan, FTA và dịch chuyển chuỗi cung ứng toàn cầu.",
+        quote: "Strong ideas create opportunities. Strong arguments turn those opportunities into impact.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Tham gia giải đấu tranh biện học thuật cấp Khoa Kinh doanh Quốc tế - Marketing UEH xoay quanh các chủ đề thương mại quốc tế, chính sách công và thể chế kinh tế toàn cầu, phối hợp cùng Phó Chủ tịch UEHG 2026 và cố vấn chuyên môn chị Liêu Uyển San.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Main Constructive Debater)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Xây dựng lập luận chiến lược & Phân tích dữ liệu tốc độ cao:</strong> Xử lý thông tin vĩ mô về thuế quan, chuỗi cung ứng và FTA trong thời gian chuẩn bị ngắn.</li>
+            <li><strong>Dự báo và phản biện đa chiều:</strong> Đánh giá góc nhìn đối lập và bảo vệ hệ thống luận điểm dưới áp lực cao.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🥉 Đạt giải Á quân 2 cấp Khoa Kinh doanh Quốc tế - Marketing UEH.</li>
+          </ul>
+        `
+      },
+      "case-14": {
+        badge: "3.15 — EQUAL VOICE DEBATE CHAMPIONSHIP (Á QUÂN 2)",
+        title: "🎭 TRIPLE KILLER – DÙNG TIẾNG NÓI NGƯỜI TRẺ ĐỂ THÚC ĐẨY CÔNG BẰNG XÃ HỘI",
+        role: "Debater & Performance Artist",
+        period: "2025 (Ký túc xá UEH)",
+        summary: "Kết hợp tranh biện học thuật với nghệ thuật kể chuyện, diễn kịch và trình diễn rap trực tiếp tại đêm Chung kết nhằm lan tỏa thông điệp bình đẳng giới và trách nhiệm cộng đồng.",
+        quote: "People may remember your data for a moment, but they remember how your story made them feel for a lifetime.",
+        content: `
+          <h4 class="text-lg font-bold text-blue-400">📌 Tổng quan dự án</h4>
+          <p>Hành trình tranh biện học thuật kết hợp biểu đạt nghệ thuật xoay quanh công bằng xã hội, bình đẳng giới và quản trị cộng đồng tại UEH.</p>
+          <h4 class="text-lg font-bold text-blue-400 mt-6">⚙️ Những đóng góp nổi bật (Debater & Performance Artist)</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Xây dựng lập luận công bằng xã hội:</strong> Phân tích rào cản thể chế và định kiến cộng đồng bằng dữ liệu thực tiễn.</li>
+            <li><strong>Tích hợp nghệ thuật vào truyền thông:</strong> Thiết kế tiết mục sân khấu kết hợp tranh biện, diễn kịch và trình diễn rap tại đêm Chung kết để chạm tới cảm xúc khán giả.</li>
+          </ul>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Kết quả & Thành tích</h4>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>🥈 Đạt giải Á quân 2 chung cuộc & Đội thi có phần trình bày sáng tạo, giàu cảm xúc nhất chương trình.</li>
+          </ul>
+        `
+      },
+      "venture-1": {
+        badge: "[VENTURE 01] — CORE VENTURE",
+        title: "🏠 CHUỖI LƯU TRÚ SINH VIÊN UNISTAY: BÀI HỌC ĐẦU TIÊN VỀ XÂY DỰNG DOANH NGHIỆP THỰC SỰ",
+        role: "Founder & Manager",
+        period: "06/2024 – Hiện tại",
+        summary: "Khảo sát, cải tạo và vận hành chuỗi lưu trú sinh viên tại TP.HCM đạt tỷ lệ lấp đầy gần 90% và duy trì biên lợi nhuận vận hành ổn định 25%.",
+        quote: "Một căn phòng trống không chỉ là một căn phòng trống. Đó là doanh thu của ngày hôm nay sẽ không bao giờ quay trở lại.",
+        content: `
+          <h4 class="text-lg font-bold text-emerald-400">🚲 Hai Tháng Trước Ngày Khai Trương</h4>
+          <p>Trong quá trình học tập tại TP.HCM, tôi nhận thấy việc tìm kiếm một nơi ở vừa có chi phí hợp lý vừa đảm bảo chất lượng sống luôn là bài toán khó đối với sinh viên. Khoảng hai tháng trước khi chính thức vận hành, mỗi ngày của tôi đều bắt đầu bằng những địa chỉ mới trên bản đồ thành phố: di chuyển giữa các quận, gặp gỡ chủ nhà, đánh giá hiện trạng cơ sở vật chất và tính toán khả năng khai thác dài hạn.</p>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">🔨 Khi Một Căn Nhà Trở Thành Một Dự Án</h4>
+          <p>Ngay sau khi ký hợp đồng, mỗi căn phòng trở thành một dự án cải tạo thực thụ: làm việc với đội sửa chữa, nhà cung cấp nội thất, đơn vị vận chuyển, kiểm tra điện nước và rà soát ngân sách mỗi tối. Tôi nhận ra xây dựng doanh nghiệp không chỉ là đưa ra quyết định lớn, mà là giải quyết hàng trăm vấn đề nhỏ xuất hiện mỗi ngày tại công trình.</p>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">📈 Những Vị Khách Đầu Tiên & Trò Chơi Đường Dài</h4>
+          <p>Thay vì giảm giá mạnh ngắn hạn, tôi tập trung tối đa vào trải nghiệm người ở, trực tiếp dẫn khách và lắng nghe phản hồi. Từ những khách thuê đầu tiên, lời giới thiệu truyền miệng giúp tỷ lệ lấp đầy tăng trưởng bền vững. Tôi thiết lập lịch kiểm tra định kỳ, mạng lưới nhà thầu bảo trì và quy trình xử lý sự cố nhanh chóng, đưa Unistay đạt tỷ lệ lấp đầy gần <strong>90%</strong> và biên lợi nhuận vận hành khoảng <strong>25%</strong>.</p>
+        `
+      },
+      "venture-2": {
+        badge: "[VENTURE 02] — CORE VENTURE",
+        title: "⚡ EDUTYNKER / TYNKER TUTOR: KIẾN TRÚC HỆ SINH THÁI SỐ 10,000 THÀNH VIÊN",
+        role: "Founder & Manager",
+        period: "09/2022 – 06/2024",
+        summary: "Xây dựng chuỗi cung ứng học liệu số tự động hóa từ năm 17 tuổi, phục vụ 10,000+ thành viên với 6 khóa học chuyên sâu và hơn 20 gói học liệu số hóa.",
+        quote: "Vận hành một chuỗi cung ứng số cho 10,000 người dùng đòi hỏi tính tự động hóa tuyệt đối. Điểm nghẽn không nằm ở kho bãi vật lý, mà nằm ở trải nghiệm click chuột của khách hàng.",
+        content: `
+          <h4 class="text-lg font-bold text-emerald-400">🌌 Khúc Dạo Đầu & Cơn Ác Mộng Điểm Nghẽn Học Liệu</h4>
+          <p>Khởi đầu từ những đêm thức đến 2 giờ sáng năm lớp 12 (09/2022), tôi nhận ra học sinh cuối cấp đang bị bội thực thông tin nhưng đói phương pháp. Tôi áp dụng tư duy quản trị chuỗi cung ứng để đóng gói tri thức thành các module logic và phân phối đúng thời điểm.</p>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">🛠️ Thiết Kế Chuỗi Cung Ứng Số & Tự Động Hóa</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Tự động hóa luồng tiếp nhận:</strong> Đồng bộ biểu mẫu đăng ký với hệ thống phân quyền tự động, giải phóng tài nguyên ngay khi khách hàng click đơn.</li>
+            <li><strong>Triệt tiêu thời gian chết:</strong> Đảm bảo luồng tải dữ liệu ổn định ngay cả trong các đợt cao điểm thi thử toàn quốc.</li>
+            <li><strong>Vận hành dựa trên dữ liệu (Data-driven Operations):</strong> Phân tích engagement metrics hàng tuần để tinh chỉnh 6 khóa học chuyên sâu và hơn 20 gói học liệu, tạo dòng doanh thu tự động ổn định.</li>
+          </ul>
+        `
+      },
+      "venture-3": {
+        badge: "[VENTURE 03] — CORE VENTURE",
+        title: "⏱️ CHIẾN DỊCH CRUNCH 30 NGÀY TÁI THIẾT VẬN HÀNH TẠI BRIGHTWAY & VIỆT TRÍ",
+        role: "Operations & Event Specialist / Marketing Leader",
+        period: "08/2024 – 09/2024",
+        summary: "Tái khởi động chi nhánh đóng băng suốt 6 tháng chỉ trong đúng 30 ngày bằng biểu đồ Gantt kỷ luật, đạt 100% On-time Readiness và quy tụ 18 nhân vật chủ chốt trong đêm sự kiện.",
+        quote: "Operations không phải là việc duy trì một cỗ máy đang chạy êm ái trong phòng kính. Nó là bản lĩnh lao vào giữa đống đổ nát, dùng dữ liệu để cô lập điểm chết và hồi sinh dòng chảy giá trị.",
+        content: `
+          <h4 class="text-lg font-bold text-emerald-400">⏳ Điểm Chết 6 Tháng & Trận Chiến Trên Bản Đồ Gantt</h4>
+          <p>Đối mặt với một chi nhánh đình trệ suốt 6 tháng, tôi thiết lập bản đồ Gantt chi tiết đến từng khung giờ: tái cấu trúc Vòng lặp Thu mua (Procurement Loop), sàng lọc nhà cung cấp ứng cứu nhanh (Vendor Selection) và trực tiếp giám sát Logistics Vật tư Hiện trường (Material Supply Logistics) để hoàn thiện mặt bằng phòng học.</p>
+          <h4 class="text-lg font-bold text-emerald-400 mt-6">🎯 Kết Quả Thực Thi</h4>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>100% On-time Readiness:</strong> Chi nhánh mới đạt mức độ sẵn sàng vận hành hoàn hảo đúng hạn 30 ngày.</li>
+            <li><strong>18 Key Participants:</strong> Đồng bộ hóa kênh phân phối số và quan hệ đối tác, thu hút 18 nhân vật chủ chốt tham dự đêm sự kiện tái khởi động bộ máy kinh doanh.</li>
+          </ul>
+        `
+      },
+      "log-1": {
+        badge: "[LOG 01] — LEADERSHIP LOG",
+        title: "🤝 IBP002 VOLUNTEER CAMPAIGNS – QU
