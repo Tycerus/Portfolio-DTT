@@ -1335,5 +1335,113 @@
 
     renderArchive();
   </script>
+        <!-- ================= LIVE VISUAL EDITOR TOOLKIT ================= -->
+  <div id="live-editor-toolbar" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 bg-slate-900/95 backdrop-blur-md border border-blue-500/50 p-2 rounded-2xl shadow-2xl font-mono text-xs">
+    <button id="toggle-edit-btn" onclick="toggleEditMode()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition flex items-center gap-2">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <span id="edit-btn-text">Bật Chế độ Sửa</span>
+    </button>
+    <button id="save-export-btn" onclick="exportUpdatedHTML()" class="hidden px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition items-center gap-2">
+      <i class="fa-solid fa-floppy-disk"></i> Tải file index.html mới
+    </button>
+  </div>
+
+  <script>
+    let isEditing = false;
+
+    function toggleEditMode() {
+      isEditing = !isEditing;
+      const btn = document.getElementById('toggle-edit-btn');
+      const text = document.getElementById('edit-btn-text');
+      const saveBtn = document.getElementById('save-export-btn');
+
+      if (isEditing) {
+        btn.classList.replace('bg-blue-600', 'bg-amber-600');
+        text.textContent = 'Đang bật Sửa (Bấm để Tắt)';
+        saveBtn.classList.remove('hidden');
+        saveBtn.classList.add('inline-flex');
+        enableVisualEditing();
+      } else {
+        btn.classList.replace('bg-amber-600', 'bg-blue-600');
+        text.textContent = 'Bật Chế độ Sửa';
+        saveBtn.classList.add('hidden');
+        saveBtn.classList.remove('inline-flex');
+        disableVisualEditing();
+      }
+    }
+
+    function enableVisualEditing() {
+      // 1. Quản lý Ảnh: Click để đổi ảnh
+      document.querySelectorAll('img').forEach(img => {
+        img.style.outline = '3px dashed #3b82f6';
+        img.style.cursor = 'pointer';
+        img.title = 'Bấm vào để đổi ảnh này';
+        img.onclick = (e) => {
+          e.stopPropagation();
+          const choice = prompt('CHỌN CÁCH ĐỔI ẢNH:\n- Cách 1: Dán đường link ảnh online (https://...)\n- Cách 2: Gõ tên file đã up trên GitHub (vd: SECC.JPG, avatar.jpg)\n\nNhập link hoặc tên file vào ô dưới:', img.getAttribute('src'));
+          if (choice && choice.trim() !== '') {
+            img.src = choice.trim();
+            img.removeAttribute('srcset');
+            alert('Đã cập nhật ảnh thành công!');
+          }
+        };
+      });
+
+      // 2. Quản lý Nút & Link: Click để đổi link hoặc xóa
+      document.querySelectorAll('a, button:not(#toggle-edit-btn):not(#save-export-btn)').forEach(el => {
+        el.style.outline = '2px dashed #10b981';
+        el.setAttribute('data-old-onclick', el.getAttribute('onclick') || '');
+        
+        el.oncontextmenu = (e) => {
+          e.preventDefault();
+          if (confirm('Bạn có chắc muốn XÓA nút/phần tử này khỏi web không?')) {
+            el.remove();
+          }
+        };
+
+        if (el.tagName.toLowerCase() === 'a') {
+          el.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const newLink = prompt('SỬA LINK ĐÍCH (URL):\nDán link mới (vd: https://www.aeternagame.site/ hoặc link Drive):', el.getAttribute('href') || '');
+            if (newLink !== null) {
+              el.setAttribute('href', newLink.trim());
+              alert('Đã cập nhật link thành công!');
+            }
+          };
+        }
+      });
+    }
+
+    function disableVisualEditing() {
+      document.querySelectorAll('img').forEach(img => {
+        img.style.outline = '';
+        img.style.cursor = '';
+        img.onclick = null;
+      });
+      document.querySelectorAll('a, button').forEach(el => {
+        el.style.outline = '';
+        el.oncontextmenu = null;
+      });
+    }
+
+    function exportUpdatedHTML() {
+      disableVisualEditing();
+      // Thu dọn toolbar tạm thời trước khi tải mã về
+      const toolbar = document.getElementById('live-editor-toolbar');
+      const clonedDoc = document.documentElement.cloneNode(true);
+      
+      const blob = new Blob(['<!DOCTYPE html>\n' + clonedDoc.outerHTML], { type: 'text/html;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      alert('Đã tải file index.html mới về máy! Bạn chỉ cần vào GitHub, bấm Upload files và kéo thả file index.html vừa tải vào để lưu.');
+      toggleEditMode();
+    }
+  </script>
 </body>
 </html>
