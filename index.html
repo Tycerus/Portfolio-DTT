@@ -1,48 +1,189 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Cá Nhân</title>
+  <title>Dương Thế Tài | Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
-  <!-- Header -->
-  <header class="max-w-4xl mx-auto w-full px-6 py-8 flex justify-between items-center">
-    <div class="text-xl font-bold tracking-tight text-white">Portfolio.</div>
-    <a href="#contact" class="px-4 py-2 text-sm bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition">Liên hệ</a>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800/80">
+    <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
+        Dương Thế Tài
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
+        <a href="#about" class="hover:text-blue-400 transition">Giới thiệu</a>
+        <a href="#projects" class="hover:text-blue-400 transition">Dự án</a>
+        <a href="#experience" class="hover:text-blue-400 transition">Kinh nghiệm</a>
+        <a href="#contact" class="hover:text-blue-400 transition">Liên hệ</a>
+      </nav>
+      <a href="#contact" class="px-4 py-2 text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg transition shadow-lg shadow-blue-600/20">
+        Kết nối ngay
+      </a>
+    </div>
   </header>
 
-  <!-- Hero Section -->
-  <main class="max-w-4xl mx-auto w-full px-6 py-16 flex-1 flex flex-col justify-center">
-    <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold text-blue-400 bg-blue-950/60 border border-blue-800 rounded-full w-max">
-      Sẵn sàng kết nối & hợp tác
-    </div>
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-white mb-6">
-      Xin chào, đây là trang portfolio cá nhân.
-    </h1>
-    <p class="text-lg md:text-xl text-slate-400 max-w-2xl mb-8 leading-relaxed">
-      Nơi chia sẻ các dự án, hành trình học tập, kinh nghiệm làm việc và những sáng kiến công nghệ tôi đang theo đuổi.
-    </p>
+  <main class="max-w-5xl mx-auto px-6 py-12 md:py-20 space-y-24">
+    <!-- Hero Section -->
+    <section id="about" class="flex flex-col items-start gap-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold text-blue-400 bg-blue-950/50 border border-blue-800/60 rounded-full">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        International Business & Logistics Enthusiast
+      </div>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+        Tối ưu vận hành chuỗi cung ứng bằng <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">công nghệ & đổi mới</span>.
+      </h1>
+      <p class="text-base md:text-lg text-slate-400 max-w-2xl leading-relaxed">
+        Xin chào! Tôi là Thế Tài, sinh viên chuyên ngành Kinh doanh quốc tế & Quản lý chuỗi cung ứng tại TP. Hồ Chí Minh. Tôi đam mê giải quyết các bài toán vận hành logistics thực địa và kiến tạo các giải pháp khởi nghiệp công nghệ.
+      </p>
+      <div class="flex flex-wrap items-center gap-4 pt-2">
+        <a href="#projects" class="px-6 py-3 text-sm font-semibold text-white bg-slate-900 border border-slate-700 hover:border-slate-500 rounded-lg transition">
+          Xem các dự án &rarr;
+        </a>
+        <a href="mailto:contact@duongthetai.site" class="px-6 py-3 text-sm font-semibold text-slate-300 hover:text-white transition">
+          Gửi email hợp tác
+        </a>
+      </div>
+    </section>
 
-    <!-- Project Showcase Placeholder -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-      <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-slate-700 transition">
-        <h3 class="text-xl font-bold text-white mb-2">Dự án & Cuộc thi</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Các giải pháp số, dự án hackathon và dự án kinh doanh khởi nghiệp đã thực hiện.</p>
-        <span class="text-blue-400 text-sm font-semibold">Xem chi tiết &rarr;</span>
+    <!-- Key Projects Section -->
+    <section id="projects" class="space-y-8">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Dự án & Sáng kiến</h2>
+        <p class="text-slate-400 text-sm mt-1">Các dự án khởi nghiệp, giải pháp công nghệ và đề án dự thi nổi bật.</p>
       </div>
-      <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-slate-700 transition">
-        <h3 class="text-xl font-bold text-white mb-2">Kinh nghiệm & Kỹ năng</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Quá trình làm việc, chứng chỉ chuyên môn và các lĩnh vực nghiên cứu trọng tâm.</p>
-        <span class="text-blue-400 text-sm font-semibold">Xem chi tiết &rarr;</span>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Project 1 -->
+        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
+          <div>
+            <div class="flex items-center justify-between text-xs text-blue-400 font-semibold mb-3">
+              <span>AGROBRICK</span>
+              <span class="px-2 py-0.5 rounded bg-blue-950/80 border border-blue-800">Top 100 Startup Wheel 2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition mb-2">Vật liệu xây dựng bền vững từ nông nghiệp</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Dự án khởi nghiệp tái chế phụ phẩm nông nghiệp thành gạch sinh thái, hướng đến kinh tế tuần hoàn và giảm phát thải carbon trong xây dựng.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Sustainability</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Circular Economy</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Business Model</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
+          <div>
+            <div class="flex items-center justify-between text-xs text-emerald-400 font-semibold mb-3">
+              <span>Cont-tect (Team MOTION MASTERS)</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800">Finalist Digiport Hackathon</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition mb-2">Hệ thống phát hiện lỗi container tự động</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Đề xuất ứng dụng AI phát hiện hỏng hóc vỏ container tại cảng biển, rút ngắn thời gian kiểm đếm và tối ưu an toàn vận tải hàng hải.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">AI Vision</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Port Logistics</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Automation</span>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
+          <div>
+            <div class="flex items-center justify-between text-xs text-purple-400 font-semibold mb-3">
+              <span>VILAW LEGISAI</span>
+              <span class="px-2 py-0.5 rounded bg-purple-950/80 border border-purple-800">UII Sandbox Incubated</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition mb-2">Trợ lý AI tra cứu & hỗ trợ pháp lý</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Nền tảng LegalTech áp dụng AI giúp doanh nghiệp vừa và nhỏ dễ dàng rà soát hợp đồng và tra cứu văn bản quy phạm pháp luật nhanh chóng.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">LegalTech</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">GenAI</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Startup</span>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="p-6 bg-slate-900/60 border border-slate-800 hover:border-slate-700 rounded-2xl flex flex-col justify-between transition group">
+          <div>
+            <div class="flex items-center justify-between text-xs text-amber-400 font-semibold mb-3">
+              <span>AETERNA</span>
+              <span class="px-2 py-0.5 rounded bg-amber-950/80 border border-amber-800">APRU APAC Hackathon 2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-amber-400 transition mb-2">Giải pháp dữ liệu chính sách khu vực</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Mô hình phân tích dữ liệu phục vụ hoạch định chính sách công và thích ứng số trong khu vực châu Á - Thái Bình Dương.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80 text-xs text-slate-400">
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Data Analytics</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Public Policy</span>
+            <span class="px-2.5 py-1 bg-slate-950 rounded-md">Regional</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="space-y-8">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Kinh nghiệm & Chuyên môn</h2>
+        <p class="text-slate-400 text-sm mt-1">Quá trình thực chiến tại hiện trường logistics và các chứng chỉ chuyên ngành.</p>
+      </div>
+
+      <div class="space-y-6 border-l-2 border-slate-800 ml-3 pl-6">
+        <div class="relative">
+          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-slate-950"></span>
+          <span class="text-xs text-blue-400 font-mono">Operations Experience</span>
+          <h3 class="text-lg font-bold text-white mt-1">Air Export Field Operations Intern &bull; ITL Freight Management</h3>
+          <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+            Phụ trách trực tiếp quy trình kiểm hóa, giao nhận hàng không xuất khẩu tại hiện trường; phối hợp với hải quan sân bay và hãng hàng không để đảm bảo tiến độ chuyến bay.
+          </p>
+        </div>
+
+        <div class="relative">
+          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-slate-700 ring-4 ring-slate-950"></span>
+          <span class="text-xs text-slate-400 font-mono">Professional Training</span>
+          <h3 class="text-lg font-bold text-white mt-1">Nghiệp vụ Hiện trường (OPS) & Chứng từ Xuất nhập khẩu (DOCS)</h3>
+          <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+            Hoàn thành các khóa đào tạo thực hành chuyên sâu TMT OPS 5 và TMT DOCS 6 tại Tân Minh Trí, làm chủ quy trình phát hành Bill of Lading, AWB, khai báo hải quan điện tử và điều phối vận tải.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="p-8 md:p-12 bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-3xl text-center space-y-6">
+      <h2 class="text-3xl font-extrabold text-white tracking-tight">Sẵn sàng mở rộng mạng lưới</h2>
+      <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+        Tôi luôn hoan nghênh những cơ hội giao lưu học hỏi, thảo luận về các dự án chuỗi cung ứng, logistics hiện trường hoặc sáng kiến khởi nghiệp công nghệ.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4 pt-2">
+        <a href="mailto:contact@duongthetai.site" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-xl transition shadow-lg shadow-blue-600/25">
+          <i class="fa-regular fa-envelope"></i> Gửi tin nhắn qua Email
+        </a>
+      </div>
+    </section>
   </main>
 
-  <!-- Footer -->
-  <footer id="contact" class="max-w-4xl mx-auto w-full px-6 py-8 border-t border-slate-900 text-center text-sm text-slate-500">
-    &copy; 2026 Portfolio. Triển khai bằng GitHub Pages & Vibe Coding.
+  <footer class="border-t border-slate-900 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p>&copy; 2026 Dương Thế Tài. Hosted on GitHub Pages & Powered by Vibe Coding.</p>
+      <p class="font-mono text-slate-600">domain: www.duongthetai.site</p>
+    </div>
   </footer>
 </body>
 </html>
