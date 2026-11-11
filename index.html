@@ -7,19 +7,22 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
+<script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Times New Roman"', 'Times', 'serif'],
+            mono: ['"Times New Roman"', 'Times', 'serif'],
           }
         }
       }
     }
   </script>
   <style>
+    *, body, button, input, textarea, .font-sans, .font-mono {
+  font-family: "Times New Roman", Times, serif !important;
+}
     body {
       background-color: #050811;
       background-image: 
@@ -114,6 +117,7 @@
     <section id="sec-index" class="tab-content active space-y-16">
       
       <!-- 1.1 Editorial Biography & Profile -->
+     <!-- 1.1 Editorial Biography & Profile -->
       <div class="relative p-8 md:p-12 rounded-3xl glass-card border border-slate-800/90 shadow-2xl overflow-hidden">
         <div class="absolute -top-24 -right-24 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 relative z-10">
@@ -121,19 +125,16 @@
           <!-- Avatar Frame -->
           <div class="relative shrink-0 group">
             <div class="w-40 h-40 md:w-52 md:h-52 rounded-3xl overflow-hidden border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 bg-slate-950 flex items-center justify-center">
-              <img  src="avatar.jpg" data-alt-srcs="Ivennio.jpeg,Ivennio_2.jpeg,SECC.JPG,avatar.png" onerror="handleSmartImgError(this)" alt="Dương Thế Tài" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+              <img id="hero-avatar" src="avartar.jpg" data-alt-srcs="avatar.jpg,avartar.png,avatar.png,Ivennio.jpeg" onerror="handleSmartImgError(this)" alt="Dương Thế Tài" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
             </div>
-            <span class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-mono font-bold bg-slate-950/95 border border-emerald-500/50 text-emerald-400 shadow-lg whitespace-nowrap">
+            <span class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold bg-slate-950/95 border border-emerald-500/50 text-emerald-400 shadow-lg whitespace-nowrap">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1 animate-pulse"></span>AVAILABLE FOR TRAINEE ROLES
             </span>
           </div>
 
           <!-- Bio Text -->
           <div class="space-y-5 text-center md:text-left flex-1">
-            <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/70 text-blue-400 text-xs font-mono">
-              <span>1.1 // EDITORIAL BIOGRAPHY &amp; PROFILE</span>
-              <span>&bull;</span>
-         <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/70 text-blue-400 text-xs font-mono">
+            <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-800/70 text-blue-400 text-xs font-semibold">
               <span>1.1 // EDITORIAL BIOGRAPHY &amp; PROFILE</span>
               <span>&bull;</span>
               <span>UEH DUAL-MAJOR</span>
@@ -512,6 +513,7 @@
       </div>
 
       <!-- 2.2 Dual-Major Cumulative GPA -->
+    <!-- 2.2 Dual-Major Cumulative GPA -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-blue-950/40 border border-slate-800 flex items-center justify-between">
           <div>
@@ -523,7 +525,7 @@
             <p class="text-xs text-slate-400 mt-1">Global Trade, Cross-Border Strategy &amp; Supply Chain</p>
           </div>
           <div class="text-right">
-            <span class="text-3xl font-black font-mono text-white">3.42</span>
+            <span class="text-3xl font-black font-mono text-white">3.45</span>
             <span class="block text-xs font-mono text-slate-400">/ 4.0 GPA</span>
           </div>
         </div>
@@ -537,13 +539,13 @@
             <p class="text-xs text-slate-400 mt-1">Operations, Procurement, Port &amp; Cold-Chain Systems</p>
           </div>
           <div class="text-right">
-            <span class="text-3xl font-black font-mono text-white">3.45</span>
+            <span class="text-3xl font-black font-mono text-white">3.62</span>
             <span class="block text-xs font-mono text-slate-400">/ 4.0 GPA</span>
           </div>
         </div>
       </div>
-
       <!-- 2.3 High-Performance Core Courses -->
+    <!-- 2.3 High-Performance Core Courses -->
       <div class="space-y-6">
         <h3 class="text-xl font-bold text-white">
           <span class="lang-vi">2.3 &mdash; Các Học Phần Chuyên Ngành Điểm Tuyệt Đối (4.0 / 4.0)</span>
@@ -551,6 +553,7 @@
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
+          <!-- CORE MODULE 01: ERP ODOO -->
           <div class="p-6 rounded-2xl glass-card border border-slate-800 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex justify-between items-center">
@@ -568,12 +571,13 @@
               </p>
             </div>
             <div class="pt-3 border-t border-slate-800">
-              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-blue-400 hover:text-blue-300">
+              <a href="https://drive.google.com/file/d/1LB7s8KCCBaiy7y_gFhPYzXZmFBJp4J_x/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-mono text-blue-400 hover:text-blue-300 underline-offset-4 hover:underline">
                 <i class="fa-solid fa-circle-play"></i> ERP - G3 - CTWINDOW + ODOO.mp4
               </a>
             </div>
           </div>
 
+          <!-- CORE MODULE 02: IBP PUREVIA -->
           <div class="p-6 rounded-2xl glass-card border border-slate-800 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex justify-between items-center">
@@ -591,12 +595,13 @@
               </p>
             </div>
             <div class="pt-3 border-t border-slate-800">
-              <a href="https://drive.google.com/drive/folders/1e0UKPsq3RucPsMuE-_FaZAX3NBPPy2vi?usp=sharing" target="_blank" class="inline-flex items-center gap-2 text-xs font-mono text-purple-400 hover:text-purple-300">
+              <a href="https://drive.google.com/file/d/1frs8fH1HOeP02x--kdyy_dBKMhduIKlc/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-mono text-purple-400 hover:text-purple-300 underline-offset-4 hover:underline">
                 <i class="fa-solid fa-file-pdf"></i> PUREVIA - IBP FINAL PRJ.pdf
               </a>
             </div>
           </div>
 
+          <!-- CORE MODULE 03: GLOBUS SIMULATION -->
           <div class="p-6 rounded-2xl glass-card border border-slate-800 flex flex-col justify-between space-y-4">
             <div class="space-y-3">
               <div class="flex justify-between items-center">
@@ -613,8 +618,10 @@
                 <span class="lang-en"><strong>Execution:</strong> Acted as a C-level executive to operate a virtual global corporation. Applied core business intelligence and logistics strategies to compete in a simulated market, optimizing production, pricing, and distribution to maximize market share.</span>
               </p>
             </div>
-            <div class="pt-3 border-t border-slate-800 text-xs font-mono text-slate-400">
-              <i class="fa-solid fa-globe mr-1 text-amber-400"></i> Globus Executive Simulation
+            <div class="pt-3 border-t border-slate-800">
+              <a href="https://drive.google.com/file/d/1P9gnYEB8hxe7NSp75aptKaTcSGjkJv4M/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 hover:text-amber-300 underline-offset-4 hover:underline">
+                <i class="fa-solid fa-globe"></i> Globus Executive Simulation
+              </a>
             </div>
           </div>
 
@@ -2038,8 +2045,8 @@
         period_en: "2023 – 2026",
         img: "Ivennio.jpeg",
         altImgs: "Ivennio_2.jpeg,Quý Quân OU.jpg",
-        summary: "Góc nhìn chân thực phía sau hơn 15 giải thưởng và GPA song ngành 3.42 & 3.45: quản trị cuộc đời như một hệ thống vận hành, coi sự tập trung là tài sản chiến lược và rèn luyện năng lực dự báo trước mỗi vòng chung kết.",
-        summary_en: "Behind 15+ national awards and a 3.42 & 3.45 dual-major GPA: governing life as an operating system, treating focus as strategic capital, and living several steps ahead through scenario forecasting.",
+        summary: "Góc nhìn chân thực phía sau hơn 15 giải thưởng và GPA song ngành 3.45 & 3.62: quản trị cuộc đời như một hệ thống vận hành, coi sự tập trung là tài sản chiến lược và rèn luyện năng lực dự báo trước mỗi vòng chung kết.",
+        summary_en: "Behind 15+ national awards and a 3.45 & 3.62 dual-major GPA: governing life as an operating system, treating focus as strategic capital, and living several steps ahead through scenario forecasting.",
         quote: "Mọi người thường nhìn thấy chiếc cúp trên sân khấu. Nhưng rất ít người nhìn thấy những gì đã bị đánh đổi để chiếc cúp đó xuất hiện.",
         quote_en: "People see the trophy on stage. Very few see the silent trade-offs required for that trophy to exist.",
         content: `
